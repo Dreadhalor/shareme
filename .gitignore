@@ -3,6 +3,7 @@
 # dependencies
 shareme-backend/node_modules
 shareme-frontend/node_modules
+shareme-frontend/src/assets
 /.pnp
 .pnp.js
 

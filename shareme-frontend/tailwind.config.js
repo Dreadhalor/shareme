@@ -41,7 +41,7 @@ module.exports = {
       textColor: {
         lightGray: '#F1EFEE',
         primary: '#FAFAFA',
-        secColor: '#efefef',
+        secColor: '#EFEFEF',
         navColor: '#BEBEBE',
       },
       backgroundColor: {

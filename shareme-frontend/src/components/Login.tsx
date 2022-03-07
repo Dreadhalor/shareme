@@ -27,11 +27,11 @@ const Login = () => {
                   <button
                     type='button'
                     // unclear what 'outline-none' does but maybe it's a cross-compatibility thing
-                    className='flex min-w-0 cursor-pointer flex-row rounded-lg bg-mainColor p-3 outline-none'
+                    className='flex min-w-0 cursor-pointer flex-row gap-3 rounded-lg bg-mainColor p-3 outline-none'
                     onClick={renderProps.onClick}
                     disabled={renderProps.disabled}
                   >
-                    <FcGoogle className='my-auto mr-4' />
+                    <FcGoogle className='my-auto' />
                     Sign in with Google
                   </button>
                 )}

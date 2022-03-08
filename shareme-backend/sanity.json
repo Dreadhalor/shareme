@@ -1,7 +1,7 @@
 {
   "root": true,
   "project": {
-    "name": "shareme"
+    "name": "ShareMe"
   },
   "api": {
     "projectId": "hj6wguta",
@@ -15,9 +15,7 @@
   ],
   "env": {
     "development": {
-      "plugins": [
-        "@sanity/vision"
-      ]
+      "plugins": ["@sanity/vision"]
     }
   },
   "parts": [

@@ -4,6 +4,7 @@
 shareme-backend/node_modules
 shareme-frontend/node_modules
 shareme-frontend/src/assets
+shareme-frontend/.env
 /.pnp
 .pnp.js
 

@@ -2,10 +2,30 @@ import shareVideo from 'assets/share.mp4';
 import logo_white from 'assets/logowhite.png';
 import GoogleLogin, { GoogleLoginResponse, GoogleLoginResponseOffline } from 'react-google-login';
 import { FcGoogle } from 'react-icons/fc';
+import { client } from 'client';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
-  const responseGoogle = (response: GoogleLoginResponse | GoogleLoginResponseOffline) => {};
-  const responseError = (error: any) => {};
+  const navigate = useNavigate();
+  const responseGoogle = (response: GoogleLoginResponse | GoogleLoginResponseOffline) => {
+    if ('profileObj' in response) {
+      const profile = response.profileObj;
+      localStorage.setItem('user', JSON.stringify(profile));
+      const { name, googleId, imageUrl } = profile;
+      const doc = {
+        _id: googleId,
+        _type: 'user',
+        userName: name,
+        image: imageUrl,
+        // this field isn't really necessary but I don't want a repeat of NetWorth
+        googleLoginResponse: JSON.stringify(response),
+      };
+      client.createIfNotExists(doc).then(() => navigate('/', { replace: true }));
+    } else console.log(response);
+  };
+  const responseError = (error: any) => {
+    console.log(error);
+  };
 
   return (
     <div className='flex h-full flex-col items-center bg-slate-500'>
@@ -22,7 +42,7 @@ const Login = () => {
             </div>
             <div className='mx-auto shadow-2xl'>
               <GoogleLogin
-                clientId=''
+                clientId={process.env.REACT_APP_GOOGLE_API_TOKEN!}
                 render={(renderProps) => (
                   <button
                     type='button'

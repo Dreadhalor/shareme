@@ -5,5 +5,6 @@ export default {
   fields: [
     { name: 'userName', title: 'UserName', type: 'string' },
     { name: 'image', title: 'Image', type: 'string' },
+    { name: 'googleLoginResponse', title: 'GoogleLoginResponse', type: 'string' },
   ],
 };

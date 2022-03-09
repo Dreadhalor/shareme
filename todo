@@ -1,0 +1,1 @@
+* when loading the user, there's a brief delay between setting the user & the user actually being set EVEN THOUGH I use the arrow syntax for setState

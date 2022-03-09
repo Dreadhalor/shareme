@@ -7,7 +7,7 @@ export const client = SanityClientConstructor({
   dataset: 'production',
   apiVersion: '2021-11-16',
   useCdn: true,
-  // for a REAL app never EVER put a sensitive access token in the client without a proxy
+  // for a real app never EVER put a sensitive access token in the client without a proxy
   token: process.env.REACT_APP_SANITY_TOKEN,
   // we need to turn the warning off because this isn't a real app so we're exposing the token
   ignoreBrowserTokenWarning: true,

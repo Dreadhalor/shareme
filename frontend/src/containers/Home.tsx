@@ -4,7 +4,7 @@ import Pins from './Pins';
 import { HiMenu } from 'react-icons/hi';
 import { useEffect, useRef, useState } from 'react';
 import { Link, Route, Routes } from 'react-router-dom';
-import { getUser } from 'utils/data';
+import { fetchUser } from 'utils/data';
 import { User } from 'utils/interfaces';
 import { AiFillCloseCircle } from 'react-icons/ai';
 
@@ -16,7 +16,7 @@ const Home = () => {
   const scrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    getUser().then((user) => setUser(user));
+    fetchUser().then((user) => setUser(user));
     let ref = scrollRef.current;
     ref?.scrollTo(0, 0);
   }, []);
@@ -56,7 +56,7 @@ const Home = () => {
           </div>
         )}
       </div>
-      <div className='flex-1 overflow-y-auto pb-2' ref={scrollRef}>
+      <div className='flex flex-1 flex-col overflow-y-auto pb-2' ref={scrollRef}>
         <Routes>
           <Route path='/user-profile/:userId' element={<UserProfile />} />
           <Route path='/*' element={<Pins user={user && user} />} />

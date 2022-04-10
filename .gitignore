@@ -1,10 +1,10 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
-shareme-backend/node_modules
-shareme-frontend/node_modules
-shareme-frontend/src/assets
-shareme-frontend/.env
+backend/node_modules
+frontend/node_modules
+frontend/src/assets
+frontend/.env
 /.pnp
 .pnp.js
 

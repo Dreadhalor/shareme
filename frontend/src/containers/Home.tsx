@@ -26,13 +26,13 @@ const Home = () => {
   // }, [user]);
 
   return (
-    <div className='flex h-full flex-col bg-gray-50 transition-height duration-75 ease-out md:flex-row'>
+    <div className='flex h-full flex-col bg-empty transition-height duration-75 ease-out md:flex-row'>
       {/* desktop nav */}
       <div className='hidden h-full flex-initial md:flex'>
         <Sidebar user={user && user} closeToggle={setToggleSidebar} />
       </div>
       {/* mobile nav */}
-      <div className='z-10 flex flex-row shadow-md md:hidden'>
+      <div className='z-10 flex flex-row bg-white shadow-md md:hidden'>
         <div className='flex w-full flex-row items-center justify-between p-2'>
           <HiMenu
             fontSize={40}

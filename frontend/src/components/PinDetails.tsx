@@ -65,7 +65,7 @@ const PinDetails = (props: any) => {
 
   return (
     <>
-      <div className='m-auto flex max-w-[1500px] flex-col rounded-[32px] bg-white xl:flex-row'>
+      <div className='m-auto flex max-w-[1500px] flex-col rounded-lg bg-white xl:flex-row'>
         <div className='flex flex-initial items-center justify-center md:items-start'>
           <img
             className='rounded-lg'

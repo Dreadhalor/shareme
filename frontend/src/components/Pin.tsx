@@ -15,7 +15,8 @@ const Pin = ({ pin }: { pin: IPin }) => {
   const navigate = useNavigate();
   const user = getUserFromLocalStorage();
   const alreadySaved =
-    (save?.filter((item: any) => item.postedBy._id === user?.googleId)?.length ?? 0) > 0;
+    (save?.filter((item: any) => item.postedBy._id === user?.googleId)
+      ?.length ?? 0) > 0;
 
   const savePin = (id: string) => {
     if (!alreadySaved) {
@@ -44,20 +45,31 @@ const Pin = ({ pin }: { pin: IPin }) => {
     });
   };
   const cleanUrl = (url: string) => {
-    if (url.indexOf('https://') === 0) return url.slice(8);
-    if (url.indexOf('http://') === 0) return url.slice(7);
+    let prefixes = ['https://', 'http://', 'www.'];
+    //slice off all prefixes up to the second-level domain
+    prefixes.forEach((prefix: string) => {
+      if (url.indexOf(prefix) === 0) {
+        url = url.slice(prefix.length);
+      }
+    });
     return url;
   };
 
   return (
-    <div className='m-2 w-max'>
+    <div className='w-full p-2'>
       <div
         onMouseEnter={() => setPostHovered(true)}
         onMouseLeave={() => setPostHovered(false)}
         onClick={() => navigate(`/pin-details/${_id}`)}
         className='relative w-auto cursor-zoom-in overflow-hidden rounded-lg transition-all duration-200 ease-in-out hover:shadow-lg'
       >
-        <img className='w-full rounded-lg' alt='user-post' src={urlFor(image).width(250).url()} />
+        {image && (
+          <img
+            className='w-full rounded-lg'
+            alt='user-post'
+            src={urlFor(image).width(250).url()}
+          />
+        )}
         {postHovered && (
           <div className='absolute top-0 z-50 flex h-full w-full flex-col justify-between p-1.5'>
             <div className='flex items-center justify-between'>
@@ -122,7 +134,10 @@ const Pin = ({ pin }: { pin: IPin }) => {
           </div>
         )}
       </div>
-      <Link to={`user-profile/${postedBy?._id}`} className='mt-2 flex items-center gap-2'>
+      <Link
+        to={`user-profile/${postedBy?._id}`}
+        className='mt-2 flex items-center gap-2'
+      >
         <img
           className='h-8 w-8 rounded-full object-cover'
           src={postedBy?.image}

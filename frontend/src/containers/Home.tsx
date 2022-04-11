@@ -34,17 +34,25 @@ const Home = () => {
       {/* mobile nav */}
       <div className='z-10 flex flex-row shadow-md md:hidden'>
         <div className='flex w-full flex-row items-center justify-between p-2'>
-          <HiMenu fontSize={40} className='cursor-pointer' onClick={() => setToggleSidebar(true)} />
+          <HiMenu
+            fontSize={40}
+            className='cursor-pointer'
+            onClick={() => setToggleSidebar(true)}
+          />
           <Link to='/'>
             <img src={logo} alt='logo' className='w-28' />
           </Link>
           <Link to={`user-profile/${user?._id}`}>
-            <img src={user?.image} alt='logo' className='h-9 w-9 rounded-full' />
+            <img
+              src={user?.image}
+              alt='logo'
+              className='h-9 w-9 rounded-full'
+            />
           </Link>
         </div>
         {/* mobile sidebar contents */}
         {toggleSidebar && (
-          <div className='fixed top-0 left-0 z-20 h-full w-4/5 animate-slide-in overflow-y-auto bg-white shadow-md'>
+          <div className='fixed top-0 left-0 z-20 h-full animate-slide-in overflow-y-auto bg-white shadow-md'>
             <div className='absolute flex w-full justify-end p-2'>
               <AiFillCloseCircle
                 fontSize={30}
@@ -56,7 +64,10 @@ const Home = () => {
           </div>
         )}
       </div>
-      <div className='flex flex-1 flex-col overflow-y-auto pb-2' ref={scrollRef}>
+      <div
+        className='flex flex-1 flex-col overflow-y-auto pb-2'
+        ref={scrollRef}
+      >
         <Routes>
           <Route path='/user-profile/:userId' element={<UserProfile />} />
           <Route path='/*' element={<Pins user={user && user} />} />

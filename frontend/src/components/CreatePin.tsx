@@ -84,14 +84,13 @@ const CreatePin = ({ user }: any) => {
   };
 
   return (
-    // <div className='mt-5 flex flex-col items-center justify-center lg:h-4/5'>
-    <div className='mt-5 flex flex-col items-center justify-center'>
+    <div className='flex flex-col items-center justify-center'>
       {fields && (
         <p className='mb-5 text-xl text-red-500 transition-all duration-150 ease-in'>
           Please fill in all the fields.
         </p>
       )}
-      <div className='flex w-full flex-col items-center justify-center bg-white p-3 lg:w-4/5 lg:flex-row'>
+      <div className='flex w-full flex-col items-center justify-center bg-white p-3 lg:mx-4 lg:flex-row'>
         <div className='flex w-full min-w-0 flex-0.7 bg-secondaryColor p-3 lg:flex-1'>
           <div className='relative h-full w-full'>
             {!(imageAsset || loading) && (
@@ -133,7 +132,7 @@ const CreatePin = ({ user }: any) => {
                 <div className='relative h-full'>
                   <img
                     src={imageAsset?.url}
-                    alt='Uploaded image'
+                    alt='uploaded'
                     className='h-full w-full object-contain'
                   />
                   <button
@@ -166,7 +165,7 @@ const CreatePin = ({ user }: any) => {
             <div className='my-2 flex items-center gap-2 rounded-lg bg-white'>
               <img
                 src={user.image}
-                alt='User profile image'
+                alt='User profile'
                 className='h-10 w-10 rounded-full'
               />
               <p className='font-bold'>{user.userName}</p>

@@ -19,6 +19,9 @@ export interface IPin {
     };
   };
   _id: string;
+  title: string;
+  about: string;
+  category: string;
   destination: string;
   postedBy: {
     _id: string;
@@ -27,6 +30,17 @@ export interface IPin {
   };
   save: [
     {
+      _key: string;
+      postedBy: {
+        _id: string;
+        userName: string;
+        image: string;
+      };
+    }
+  ];
+  comments: [
+    {
+      comment: string;
       _key: string;
       postedBy: {
         _id: string;

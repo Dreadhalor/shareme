@@ -109,7 +109,7 @@ const Pin = ({ pin }: { pin: IPin }) => {
               {destination && (
                 <a
                   href={destination}
-                  target='blank'
+                  target='_blank'
                   rel='noreferrer'
                   className='flex items-center gap-2 truncate rounded-full bg-white py-2 px-4 text-right font-bold text-black opacity-70 hover:opacity-100 hover:shadow-md'
                   onClick={(e) => e.stopPropagation()}

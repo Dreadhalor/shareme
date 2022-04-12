@@ -1,6 +1,6 @@
 import { Sidebar, Login, UserProfile } from 'components';
 import logo from 'assets/logo.png';
-import Pins from './Pins';
+import Pins from 'containers/Pins';
 import { HiMenu } from 'react-icons/hi';
 import { useEffect, useRef, useState } from 'react';
 import { Link, Route, Routes } from 'react-router-dom';
@@ -20,10 +20,6 @@ const Home = () => {
     let ref = scrollRef.current;
     ref?.scrollTo(0, 0);
   }, []);
-  // useEffect(() => {
-  //   console.log('user:');
-  //   console.log(user);
-  // }, [user]);
 
   return (
     <div className='flex h-full flex-col bg-empty transition-height duration-75 ease-out md:flex-row'>
@@ -42,7 +38,7 @@ const Home = () => {
           <Link to='/'>
             <img src={logo} alt='logo' className='w-28' />
           </Link>
-          <Link to={`user-profile/${user?._id}`}>
+          <Link to={`/user-profile/${user?._id}`}>
             <img
               src={user?.image}
               alt='logo'

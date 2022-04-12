@@ -1,5 +1,5 @@
 import { client } from 'client';
-import { IPin, User } from './interfaces';
+import { IPin, User } from 'utils/interfaces';
 
 export const userQuery = (userId: string) => {
   const query = `*[_type == 'user' && _id == '${userId}']`;
@@ -93,6 +93,56 @@ export const pinDetailMorePinQuery = (pin: IPin) => {
     },
     save[]{
       _key,
+      postedBy->{
+        _id,
+        userName,
+        image
+      },
+    },
+  }`;
+  return query;
+};
+
+export const userCreatedPinsQuery = (userId: string) => {
+  const query = `*[ _type == 'pin' && userId == '${userId}'] | order(_createdAt desc){
+    image{
+      asset->{
+        url
+      }
+    },
+    _id,
+    destination,
+    postedBy->{
+      _id,
+      userName,
+      image
+    },
+    save[]{
+      postedBy->{
+        _id,
+        userName,
+        image
+      },
+    },
+  }`;
+  return query;
+};
+
+export const userSavedPinsQuery = (userId: string) => {
+  const query = `*[_type == 'pin' && '${userId}' in save[].userId ] | order(_createdAt desc) {
+    image{
+      asset->{
+        url
+      }
+    },
+    _id,
+    destination,
+    postedBy->{
+      _id,
+      userName,
+      image
+    },
+    save[]{
       postedBy->{
         _id,
         userName,

@@ -2,3 +2,4 @@
 - long names should be truncated when displayed underneath their pins
 - probably use a library to parse domain names accurately & account for all edge cases
 - there's a slight alignment issue with the CreatePin upload section when switching from lg to md on Chrome, not really very noticeable
+- fix up the url & download buttons on PinDetails.tsx

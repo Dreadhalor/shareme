@@ -109,7 +109,7 @@ const Pin = ({ pin }: { pin: IPin }) => {
               {destination && (
                 <a
                   href={destination}
-                  target='_blank'
+                  target='blank'
                   rel='noreferrer'
                   className='flex items-center gap-2 truncate rounded-full bg-white py-2 px-4 text-right font-bold text-black opacity-70 hover:opacity-100 hover:shadow-md'
                   onClick={(e) => e.stopPropagation()}
@@ -135,7 +135,7 @@ const Pin = ({ pin }: { pin: IPin }) => {
         )}
       </div>
       <Link
-        to={`user-profile/${postedBy?._id}`}
+        to={`/user-profile/${postedBy?._id}`}
         className='mt-2 flex items-center gap-2'
       >
         <img

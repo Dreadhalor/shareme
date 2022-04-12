@@ -1,6 +1,6 @@
 import Masonry from 'react-masonry-css';
 import { IPin } from 'utils/interfaces';
-import Pin from './Pin';
+import { Pin } from 'components';
 
 const MasonryLayout = ({ pins }: { pins: IPin[] }) => {
   const breakpointObject = {
@@ -14,7 +14,10 @@ const MasonryLayout = ({ pins }: { pins: IPin[] }) => {
 
   return (
     <div>
-      <Masonry className='flex animate-slide-fwd' breakpointCols={breakpointObject}>
+      <Masonry
+        className='flex animate-slide-fwd'
+        breakpointCols={breakpointObject}
+      >
         {pins?.map((pin: IPin) => (
           <Pin key={pin._id} pin={pin} />
         ))}

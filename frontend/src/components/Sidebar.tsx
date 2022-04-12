@@ -60,7 +60,7 @@ const Sidebar = ({ user, closeToggle }: Props) => {
       </div>
       {user && (
         <Link
-          to={`user-profile/${user._id}`}
+          to={`/user-profile/${user._id}`}
           className='my-5 mx-3 mb-3 flex items-center gap-2 rounded-lg border border-slate-200 bg-white p-2 shadow-lg'
         >
           <img

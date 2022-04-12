@@ -1,6 +1,6 @@
 import { Link, NavLink } from 'react-router-dom';
 import { RiHomeFill } from 'react-icons/ri';
-import { IoIosArrowForward } from 'react-icons/io';
+// import { IoIosArrowForward } from 'react-icons/io';
 import logo from 'assets/logo.png';
 import { User } from 'utils/interfaces';
 import { Dispatch, SetStateAction } from 'react';

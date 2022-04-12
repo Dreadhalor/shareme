@@ -1,4 +1,4 @@
-import { Sidebar, Login, UserProfile } from 'components';
+import { Sidebar, UserProfile } from 'components';
 import logo from 'assets/logo.png';
 import Pins from 'containers/Pins';
 import { HiMenu } from 'react-icons/hi';

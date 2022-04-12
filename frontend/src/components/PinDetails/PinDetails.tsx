@@ -1,9 +1,7 @@
 import { client, urlFor } from 'client';
 import { useEffect, useState } from 'react';
-import { MdDownloadForOffline } from 'react-icons/md';
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { pinDetailMorePinQuery, pinDetailQuery } from 'utils/data';
-import { v4 as uuidv4 } from 'uuid';
 import { Spinner, MasonryLayout } from 'components';
 import PinComments from './PinComments';
 import PinDetailsHeader from './PinDetailsHeader';

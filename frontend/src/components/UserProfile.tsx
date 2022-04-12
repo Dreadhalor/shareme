@@ -53,7 +53,7 @@ const UserProfile = () => {
         setPins(data);
       });
     }
-  }, [text]);
+  }, [text]); // eslint-disable-line react-hooks/exhaustive-deps
 
   if (!user) return <Spinner message='Loading user profile...' />;
 

@@ -14,14 +14,18 @@ const MasonryLayout = ({ pins }: { pins: IPin[] }) => {
 
   return (
     <div>
-      <Masonry
-        className='flex animate-slide-fwd'
-        breakpointCols={breakpointObject}
-      >
-        {pins?.map((pin: IPin) => (
-          <Pin key={pin._id} pin={pin} />
-        ))}
-      </Masonry>
+      {pins?.length > 0 ? (
+        <Masonry
+          className='flex animate-slide-fwd'
+          breakpointCols={breakpointObject}
+        >
+          {pins?.map((pin: IPin) => (
+            <Pin key={pin._id} pin={pin} />
+          ))}
+        </Masonry>
+      ) : (
+        <h2 className='mt-2 text-center text-2xl font-bold'>No pins found!</h2>
+      )}
     </div>
   );
 };

@@ -24,7 +24,9 @@ const MasonryLayout = ({ pins }: { pins: IPin[] }) => {
           ))}
         </Masonry>
       ) : (
-        <h2 className='mt-2 text-center text-2xl font-bold'>No pins found!</h2>
+        <div className='mt-2 flex w-full items-center justify-center text-xl font-bold'>
+          No pins found!
+        </div>
       )}
     </div>
   );

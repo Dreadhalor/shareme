@@ -1,10 +1,10 @@
 import { Link, NavLink } from 'react-router-dom';
 import { RiHomeFill } from 'react-icons/ri';
-// import { IoIosArrowForward } from 'react-icons/io';
 import logo from 'assets/logo.png';
 import { User } from 'utils/interfaces';
 import { Dispatch, SetStateAction } from 'react';
 import { categories } from 'utils/data';
+import login_icon from 'assets/login-icon.svg';
 
 type Props = {
   user: User;
@@ -63,7 +63,7 @@ const Sidebar = ({ user, closeToggle }: Props) => {
           ))}
         </div>
       </div>
-      {user && (
+      {user ? (
         <Link
           to={`/user-profile/${user._id}`}
           className='my-5 mx-3 mb-3 flex items-center gap-2 rounded-lg border border-slate-200 bg-white p-2 shadow-lg'
@@ -74,6 +74,18 @@ const Sidebar = ({ user, closeToggle }: Props) => {
             alt='user-profile'
           />
           <p>{user.userName}</p>
+        </Link>
+      ) : (
+        <Link
+          to={'/login'}
+          className='my-5 mx-3 mb-3 flex items-center gap-2 rounded-lg border border-slate-200 bg-white p-2 shadow-lg'
+        >
+          <img
+            src={login_icon}
+            className='h-10 w-10 rounded-full contrast-[0.1]'
+            alt='login'
+          />
+          <p className='mx-auto text-gray-500'>Not logged in</p>
         </Link>
       )}
     </div>

@@ -1,9 +1,9 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { IoMdAdd, IoMdSearch } from 'react-icons/io';
+import { AiOutlineLogin } from 'react-icons/ai';
 
-const Navbar = ({ searchTerm, setSearchTerm, user }: any) => {
+const SearchBar = ({ searchTerm, setSearchTerm, user }: any) => {
   const navigate = useNavigate();
-  if (!user) return null;
   return (
     <div className='mt-5 flex w-full gap-2 pb-5 md:gap-5'>
       {/* again, not sure what the point of outline-none & border-none are here */}
@@ -25,12 +25,35 @@ const Navbar = ({ searchTerm, setSearchTerm, user }: any) => {
         >
           <IoMdAdd />
         </Link>
-        <Link to={`/user-profile/${user?._id}`} className='hidden md:block'>
-          <img src={user.image} alt='user' className='h-12 w-12 rounded-full' />
-        </Link>
+        {user ? (
+          <Link to={`/user-profile/${user?._id}`} className='hidden md:block'>
+            <img
+              src={user.image}
+              alt='user'
+              className='h-12 w-12 rounded-full'
+            />
+          </Link>
+        ) : (
+          <Link
+            to={'/login'}
+            className='hidden h-12 w-12 items-center justify-center rounded-full bg-red-500 text-white md:flex'
+          >
+            {/* <img
+                src={login_icon}
+                alt='login'
+                className='h-12 w-12 rounded-full'
+              /> */}
+            <AiOutlineLogin fontSize={26} />
+            {/* <img
+              src={login_icon_white_plain}
+              alt='login'
+              className='ml-[2px] mb-[4px] h-8 w-8'
+            /> */}
+          </Link>
+        )}
       </div>
     </div>
   );
 };
 
-export default Navbar;
+export default SearchBar;

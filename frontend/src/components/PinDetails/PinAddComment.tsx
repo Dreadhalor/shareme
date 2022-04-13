@@ -61,7 +61,11 @@ const PinAddComment = (props: any) => {
           </button>
         </>
       ) : (
-        <h3 className='mx-auto mt-2'>Log in to add a comment!</h3>
+        <h3 className='mx-auto mt-2'>
+          <Link to={'/login'} className='hover:underline'>
+            Log in to add a comment!
+          </Link>
+        </h3>
       )}
     </div>
   );

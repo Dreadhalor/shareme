@@ -1,13 +1,18 @@
 import shareVideo from 'assets/share.mp4';
 import logo_white from 'assets/logowhite.png';
-import GoogleLogin, { GoogleLoginResponse, GoogleLoginResponseOffline } from 'react-google-login';
+import GoogleLogin, {
+  GoogleLoginResponse,
+  GoogleLoginResponseOffline,
+} from 'react-google-login';
 import { FcGoogle } from 'react-icons/fc';
 import { client } from 'client';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Login = () => {
   const navigate = useNavigate();
-  const responseGoogle = (response: GoogleLoginResponse | GoogleLoginResponseOffline) => {
+  const responseGoogle = (
+    response: GoogleLoginResponse | GoogleLoginResponseOffline
+  ) => {
     if ('profileObj' in response) {
       const profile = response.profileObj;
       localStorage.setItem('user', JSON.stringify(profile));
@@ -20,7 +25,9 @@ const Login = () => {
         // this field isn't really necessary but I don't want a repeat of NetWorth
         googleLoginResponse: JSON.stringify(response),
       };
-      client.createIfNotExists(doc).then(() => navigate('/', { replace: true }));
+      client
+        .createIfNotExists(doc)
+        .then(() => navigate('/', { replace: true }));
     } else console.log(response);
   };
   const responseError = (error: any) => {
@@ -30,7 +37,13 @@ const Login = () => {
   return (
     <div className='flex h-full flex-col items-center bg-slate-500'>
       <div className='relative h-full w-full'>
-        <video loop controls={false} muted autoPlay className='h-full w-full object-cover'>
+        <video
+          loop
+          controls={false}
+          muted
+          autoPlay
+          className='h-full w-full object-cover'
+        >
           {/* this seems to work even if I don't use the type field*/}
           {/* also it works even if I don't use the <source> tag but says 'type' does not exist on HTMLVideoElement */}
           <source src={shareVideo} type='video/mp4'></source>
@@ -60,6 +73,12 @@ const Login = () => {
                 cookiePolicy='single_host_origin'
               />
             </div>
+            <p className='mt-3 text-center font-thin text-gray-300'>
+              or{' '}
+              <Link to={'/'} className='hover:underline'>
+                continue as guest
+              </Link>
+            </p>
           </div>
         </div>
       </div>

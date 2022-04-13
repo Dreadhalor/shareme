@@ -4,6 +4,7 @@ import { GoogleLogout } from 'react-google-login';
 import { AiOutlineLogout } from 'react-icons/ai';
 import { useNavigate, useParams } from 'react-router-dom';
 import {
+  getUserFromLocalStorage,
   userCreatedPinsQuery,
   userQuery,
   userSavedPinsQuery,
@@ -30,6 +31,8 @@ const UserProfile = () => {
       : 'bg-primary text-black';
   };
 
+  const User = getUserFromLocalStorage();
+
   const random_image =
     'https://source.unsplash.com/800x450/?nature,photography';
 
@@ -53,7 +56,7 @@ const UserProfile = () => {
         setPins(data);
       });
     }
-  }, [text]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [text, userId]);
 
   if (!user) return <Spinner message='Loading user profile...' />;
 
@@ -76,7 +79,7 @@ const UserProfile = () => {
               {user.userName}
             </h1>
             <div className='z-1 absolute top-0 right-0 p-2'>
-              {userId === user._id && (
+              {userId === User?.googleId && (
                 <GoogleLogout
                   clientId={process.env.REACT_APP_GOOGLE_API_TOKEN!}
                   render={(renderProps) => (

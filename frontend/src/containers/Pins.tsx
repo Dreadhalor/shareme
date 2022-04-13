@@ -1,4 +1,4 @@
-import { CreatePin, Feed, Navbar, PinDetails, Search } from 'components';
+import { CreatePin, Feed, SearchBar, PinDetails, Search } from 'components';
 import { useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 
@@ -7,7 +7,7 @@ const Pins = (props: any) => {
   return (
     <div className='flex flex-col px-2 md:px-5'>
       <div className='bg-empty'>
-        <Navbar
+        <SearchBar
           searchTerm={searchTerm}
           setSearchTerm={setSearchTerm}
           user={props.user}

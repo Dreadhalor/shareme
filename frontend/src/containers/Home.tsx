@@ -6,7 +6,7 @@ import { useEffect, useRef, useState } from 'react';
 import { Link, Route, Routes } from 'react-router-dom';
 import { fetchUser } from 'utils/data';
 import { User } from 'utils/interfaces';
-import { AiFillCloseCircle } from 'react-icons/ai';
+import { AiFillCloseCircle, AiOutlineLogin } from 'react-icons/ai';
 
 const Home = () => {
   const [toggleSidebar, setToggleSidebar] = useState(false);
@@ -38,13 +38,19 @@ const Home = () => {
           <Link to='/'>
             <img src={logo} alt='logo' className='w-28' />
           </Link>
-          <Link to={`/user-profile/${user?._id}`}>
-            <img
-              src={user?.image}
-              alt='logo'
-              className='h-9 w-9 rounded-full'
-            />
-          </Link>
+          {user ? (
+            <Link to={`/user-profile/${user?._id}`}>
+              <img
+                src={user?.image}
+                alt='logo'
+                className='h-9 w-9 rounded-full'
+              />
+            </Link>
+          ) : (
+            <Link to={'/login'}>
+              <AiOutlineLogin fontSize={40} />
+            </Link>
+          )}
         </div>
         {/* mobile sidebar contents */}
         {toggleSidebar && (

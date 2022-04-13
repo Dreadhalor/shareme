@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { AiOutlineCloudUpload } from 'react-icons/ai';
 import { MdDelete } from 'react-icons/md';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import { client } from 'client';
 import { Spinner } from 'components';
@@ -82,6 +82,19 @@ const CreatePin = ({ user }: any) => {
       navigate('/');
     });
   };
+
+  //if there is no user, return a div saying you need to login
+  if (!user) {
+    return (
+      <div className='mt-3 flex h-full flex-col items-center justify-center'>
+        <h1 className='text-2xl font-bold'>
+          <Link to={'/login'} className='hover:underline'>
+            Log in to create a pin!
+          </Link>
+        </h1>
+      </div>
+    );
+  }
 
   return (
     <div className='flex flex-col items-center justify-center'>

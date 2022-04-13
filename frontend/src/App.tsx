@@ -5,7 +5,7 @@ import Home from 'containers/Home';
 const App = (): JSX.Element => {
   return (
     <Routes>
-      <Route path='login' element={<Login />} />
+      <Route path='/login' element={<Login />} />
       <Route path='/*' element={<Home />} />
     </Routes>
   );

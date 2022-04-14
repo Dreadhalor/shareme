@@ -4,7 +4,7 @@ export { default as Login } from 'components/Login';
 export { default as SearchBar } from 'components/SearchBar';
 export { default as Feed } from 'components/Feed';
 export { default as PinDetails } from 'components/PinDetails/PinDetails';
-export { default as CreatePin } from 'components/CreatePin';
+export { default as CreatePin } from 'components/CreatePin/CreatePin';
 export { default as Search } from 'components/Search';
 export { default as MasonryLayout } from 'components/MasonryLayout';
 export { default as Spinner } from 'components/Spinner';

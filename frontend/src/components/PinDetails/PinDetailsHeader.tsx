@@ -5,7 +5,7 @@ const PinDetailsHeader = (props: any) => {
   const { pinDetail } = props;
   return (
     <>
-      <div id='sss' className='flex items-center justify-between'>
+      <div className='flex items-center justify-between'>
         <div className='flex items-center gap-2'>
           <a
             href={`${pinDetail?.image?.asset?.url}?dl=`}
@@ -22,7 +22,7 @@ const PinDetailsHeader = (props: any) => {
             href={pinDetail.destination}
             target='_blank'
             rel='noreferrer'
-            // className='flex items-center gap-2 truncate rounded-full bg-white py-2 px-4 text-right font-bold text-black opacity-70 hover:opacity-100 hover:shadow-md'
+            className='flex items-center gap-2 truncate rounded-full bg-white py-2 px-4 text-right font-bold text-black opacity-70 hover:opacity-100 hover:shadow-md'
             onClick={(e) => e.stopPropagation()}
           >
             {pinDetail.destination}

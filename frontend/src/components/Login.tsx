@@ -38,6 +38,7 @@ const Login = () => {
     <div className='flex h-full flex-col items-center bg-slate-500'>
       <div className='relative h-full w-full'>
         <video
+          playsInline
           loop
           controls={false}
           muted

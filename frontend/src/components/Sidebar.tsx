@@ -5,6 +5,7 @@ import { User } from 'utils/interfaces';
 import { Dispatch, SetStateAction } from 'react';
 import { categories } from 'utils/data';
 import login_icon from 'assets/login-icon.svg';
+import { IoIosArrowForward } from 'react-icons/io';
 
 type Props = {
   user: User;
@@ -74,6 +75,7 @@ const Sidebar = ({ user, closeToggle }: Props) => {
             alt='user-profile'
           />
           <p>{user.userName}</p>
+          <IoIosArrowForward className='h-5 w-5' />
         </Link>
       ) : (
         <Link

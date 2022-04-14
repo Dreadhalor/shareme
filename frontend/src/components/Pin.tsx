@@ -14,13 +14,18 @@ const Pin = ({ pin }: { pin: IPin }) => {
 
   const navigate = useNavigate();
   const user = getUserFromLocalStorage();
+  const save_length = save?.length ?? 0;
   const save_index =
-    save?.findIndex((item) => item.postedBy._id === user?.googleId) ?? -1;
+    save?.findIndex((item) => item.postedBy?._id === user?.googleId) ?? -1;
   const alreadySaved = save_index !== -1;
   // (save?.filter((item: any) => item.postedBy._id === user?.googleId)
   //   ?.length ?? 0) > 0;
 
   const toggleSavePin = (id: string) => {
+    if (!user) {
+      alert('Log in to save pins!');
+      return;
+    }
     if (alreadySaved) {
       client
         .patch(id)
@@ -98,13 +103,13 @@ const Pin = ({ pin }: { pin: IPin }) => {
               {alreadySaved ? (
                 <button
                   type='button'
-                  className='rounded-3xl bg-red-500 px-5 py-1 text-base font-bold text-white opacity-70 outline-none hover:opacity-100 hover:shadow-md'
+                  className='rounded-3xl bg-blue-500 px-5 py-1 text-base font-bold text-white opacity-70 outline-none hover:opacity-100 hover:shadow-md'
                   onClick={(e) => {
                     e.stopPropagation();
                     toggleSavePin(_id);
                   }}
                 >
-                  {save?.length} saved
+                  {save_length} saved!
                 </button>
               ) : (
                 <button
@@ -115,7 +120,7 @@ const Pin = ({ pin }: { pin: IPin }) => {
                     toggleSavePin(_id);
                   }}
                 >
-                  Save
+                  {save_length} saved
                 </button>
               )}
             </div>

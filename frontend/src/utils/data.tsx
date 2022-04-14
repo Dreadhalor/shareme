@@ -38,7 +38,7 @@ export const pin_fields = `{
   },
 }`;
 
-export const feedQuery = `*[_type == 'pin'] | order(_createAt desc) ${pin_fields}`;
+export const feedQuery = `*[_type == 'pin'] | order(_createdAt desc) ${pin_fields}`;
 
 export const pinDetailQuery = (pinId: string) => {
   const query = `*[_type == "pin" && _id == '${pinId}']{

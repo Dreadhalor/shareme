@@ -186,15 +186,15 @@ export const categories = [
       'https://i.pinimg.com/236x/03/48/b6/0348b65919fcbe1e4f559dc4feb0ee13.jpg',
   },
   {
-    name: 'websites',
+    name: 'technology',
     image:
-      'https://i.pinimg.com/750x/66/b1/29/66b1296d36598122e6a4c5452b5a7149.jpg',
+      'https://i.pinimg.com/236x/c3/33/18/c3331885677e5252dcbb7fa4b615aa53.jpg',
   },
-  {
-    name: 'photo',
-    image:
-      'https://i.pinimg.com/236x/72/8c/b4/728cb43f48ca762a75da645c121e5c57.jpg',
-  },
+  // {
+  //   name: 'photo',
+  //   image:
+  //     'https://i.pinimg.com/236x/72/8c/b4/728cb43f48ca762a75da645c121e5c57.jpg',
+  // },
   {
     name: 'food',
     image:
@@ -231,7 +231,7 @@ export const categories = [
       'https://i.pinimg.com/236x/1b/c8/30/1bc83077e363db1a394bf6a64b071e9f.jpg',
   },
   {
-    name: 'others',
+    name: 'other',
     image:
       'https://i.pinimg.com/236x/2e/63/c8/2e63c82dfd49aca8dccf9de3f57e8588.jpg',
   },

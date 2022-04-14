@@ -10,7 +10,7 @@ const TextfieldArea = (props: any) => {
     setDestination,
     categories,
     setCategory,
-    savePin,
+    uploadPin,
   } = props;
 
   return (
@@ -85,9 +85,9 @@ const TextfieldArea = (props: any) => {
           <button
             type='button'
             className='w-28 rounded-full bg-red-500 p-2 font-bold text-white outline-none'
-            onClick={savePin}
+            onClick={uploadPin}
           >
-            Save Pin!
+            Create Pin!
           </button>
         </div>
       </div>

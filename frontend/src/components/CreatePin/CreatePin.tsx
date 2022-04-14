@@ -22,7 +22,7 @@ const CreatePin = ({ user }: any) => {
 
   const navigate = useNavigate();
 
-  const savePin = async () => {
+  const uploadPin = async () => {
     if (
       !title ||
       !about ||
@@ -111,7 +111,7 @@ const CreatePin = ({ user }: any) => {
           about={about}
           destination={destination}
           categories={categories}
-          savePin={savePin}
+          uploadPin={uploadPin}
         />
       </div>
     </div>

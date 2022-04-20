@@ -1,6 +1,7 @@
 import SanityClientConstructor from '@sanity/client';
 import imageUrlBuilder from '@sanity/image-url/';
 import { SanityImageSource } from '@sanity/image-url/lib/types/types';
+import { v4 as uuidv4 } from 'uuid';
 
 export const client = SanityClientConstructor({
   projectId: process.env.REACT_APP_SANITY_PROJECT_ID,
@@ -17,3 +18,65 @@ export const client = SanityClientConstructor({
 const builder = imageUrlBuilder(client);
 
 export const urlFor = (source: SanityImageSource) => builder.image(source);
+
+export const SanityWrapper = () => {};
+
+export interface SavePinFields {
+  id: string;
+  user: any;
+  alreadySaved: boolean;
+  save_index: number;
+}
+
+export const toggleSavePin = ({
+  id,
+  user,
+  alreadySaved,
+  save_index,
+}: SavePinFields) => {
+  if (!user) {
+    alert('Log in to save pins!');
+    return Promise.resolve(false);
+  }
+  if (alreadySaved) {
+    return deleteSave({ id, save_index });
+  } else {
+    return addSave({ id, user_id: user?.googleId });
+  }
+};
+
+const deleteSave = async ({ id, save_index }: any) => {
+  return client
+    .patch(id)
+    .setIfMissing({ save: [] })
+    .splice('save', save_index, 1, [])
+    .commit()
+    .then(() => {
+      window.location.reload();
+    });
+};
+const addSave = async ({ id, user_id }: any) => {
+  return client
+    .patch(id)
+    .setIfMissing({ save: [] })
+    .insert('after', 'save[-1]', [
+      {
+        _key: uuidv4(),
+        userId: user_id,
+        postedBy: {
+          _type: 'postedBy',
+          _ref: user_id,
+        },
+      },
+    ])
+    .commit()
+    .then(() => {
+      window.location.reload();
+    });
+};
+
+export const deletePin = async (id: string) => {
+  return client.delete(id).then(() => {
+    window.location.reload();
+  });
+};

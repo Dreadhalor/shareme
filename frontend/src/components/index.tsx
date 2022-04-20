@@ -8,4 +8,4 @@ export { default as CreatePin } from 'components/CreatePin/CreatePin';
 export { default as Search } from 'components/Search';
 export { default as MasonryLayout } from 'components/MasonryLayout';
 export { default as Spinner } from 'components/Spinner';
-export { default as Pin } from 'components/Pin';
+export { default as PinCard } from 'components/PinCard';

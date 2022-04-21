@@ -1,4 +1,4 @@
-import { client } from 'client';
+import { client } from 'utils/client';
 import { useEffect, useState } from 'react';
 import { GoogleLogout } from 'react-google-login';
 import { AiOutlineLogout } from 'react-icons/ai';

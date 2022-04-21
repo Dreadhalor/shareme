@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { feedQuery, searchQuery } from 'utils/data';
 
-import { client } from 'client';
+import { client } from 'utils/client';
 import { Spinner, MasonryLayout } from 'components';
 
 const Feed = () => {

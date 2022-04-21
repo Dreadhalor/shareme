@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
-import { client } from 'client';
+import { client } from 'utils/client';
 import { Spinner } from 'components';
 import { categories } from 'utils/data';
 import ImageUploadArea from './ImageUploadArea';

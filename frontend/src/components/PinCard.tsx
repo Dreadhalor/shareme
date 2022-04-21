@@ -1,4 +1,4 @@
-import { deletePin, SavePinFields, toggleSavePin, urlFor } from 'client';
+import { deletePin, SavePinFields, toggleSavePin, urlFor } from 'utils/client';
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { IPin } from 'utils/interfaces';
@@ -18,8 +18,6 @@ const PinCard = ({ pin }: { pin: IPin }) => {
   const save_index =
     save?.findIndex((item) => item.postedBy?._id === user?.googleId) ?? -1;
   const alreadySaved = save_index !== -1;
-  // (save?.filter((item: any) => item.postedBy._id === user?.googleId)
-  //   ?.length ?? 0) > 0;
 
   const toggleSave = (id: string) => {
     let fields: SavePinFields = {

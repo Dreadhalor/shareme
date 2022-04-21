@@ -5,7 +5,7 @@ import GoogleLogin, {
   GoogleLoginResponseOffline,
 } from 'react-google-login';
 import { FcGoogle } from 'react-icons/fc';
-import { client } from 'client';
+import { client } from 'utils/client';
 import { Link, useNavigate } from 'react-router-dom';
 
 const Login = () => {

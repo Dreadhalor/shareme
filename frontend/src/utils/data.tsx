@@ -1,4 +1,4 @@
-import { client } from 'client';
+import { client } from 'utils/client';
 import { IPin, User } from 'utils/interfaces';
 
 export const userQuery = (userId: string) => {

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { MasonryLayout, Spinner } from 'components';
-import { client } from 'client';
+import { client } from 'utils/client';
 import { feedQuery, searchQuery } from 'utils/data';
 
 const Search = ({ searchTerm, setSearchTerm }: any) => {

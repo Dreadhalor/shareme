@@ -1,4 +1,4 @@
-import { client, urlFor } from 'client';
+import { client, urlFor } from 'utils/client';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { pinDetailMorePinQuery, pinDetailQuery } from 'utils/data';

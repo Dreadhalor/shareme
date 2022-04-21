@@ -1,4 +1,4 @@
-import { client } from 'client';
+import { client } from 'utils/client';
 import Spinner from 'components/Spinner';
 import { AiOutlineCloudUpload } from 'react-icons/ai';
 import { MdDelete } from 'react-icons/md';

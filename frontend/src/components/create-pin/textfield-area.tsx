@@ -95,4 +95,4 @@ const TextfieldArea = (props: any) => {
   );
 };
 
-export default TextfieldArea;
+export { TextfieldArea };

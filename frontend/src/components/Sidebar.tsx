@@ -1,11 +1,11 @@
 import { Link, NavLink } from 'react-router-dom';
 import { RiHomeFill } from 'react-icons/ri';
-import logo from 'assets/logo.png';
 import { User } from 'utils/interfaces';
 import { Dispatch, SetStateAction } from 'react';
 import { categories } from 'utils/data';
-import login_icon from 'assets/login-icon.svg';
 import { IoIosArrowForward } from 'react-icons/io';
+import logo from 'assets/logo.png';
+import login_icon from 'assets/login-icon.svg';
 
 type Props = {
   user: User;
@@ -22,11 +22,11 @@ const Sidebar = ({ user, closeToggle }: Props) => {
     if (closeToggle) closeToggle(false);
   };
   return (
-    <div className='hide-scrollbar flex h-full min-w-210 flex-col justify-between overflow-y-auto bg-white'>
+    <div className='hide-scrollbar min-w-210 flex h-full flex-col justify-between overflow-y-auto bg-white'>
       <div className='flex flex-col'>
         <Link
           to='/'
-          className='my-6 flex w-190 items-center gap-2 px-5 pt-1'
+          className='w-190 my-6 flex items-center gap-2 px-5 pt-1'
           onClick={handleCloseSidebar}
         >
           <img src={logo} alt='logo' className='w-full' />
@@ -67,7 +67,7 @@ const Sidebar = ({ user, closeToggle }: Props) => {
       {user ? (
         <Link
           to={`/user-profile/${user._id}`}
-          className='my-5 mx-3 mb-3 flex items-center gap-2 rounded-lg border border-slate-200 bg-white p-2 shadow-lg'
+          className='mx-3 my-5 mb-3 flex items-center gap-2 rounded-lg border border-slate-200 bg-white p-2 shadow-lg'
         >
           <img
             src={user.image}
@@ -80,7 +80,7 @@ const Sidebar = ({ user, closeToggle }: Props) => {
       ) : (
         <Link
           to={'/login'}
-          className='my-5 mx-3 mb-3 flex items-center gap-2 rounded-lg border border-slate-200 bg-white p-2 shadow-lg'
+          className='mx-3 my-5 mb-3 flex items-center gap-2 rounded-lg border border-slate-200 bg-white p-2 shadow-lg'
         >
           <img
             src={login_icon}
@@ -94,4 +94,4 @@ const Sidebar = ({ user, closeToggle }: Props) => {
   );
 };
 
-export default Sidebar;
+export { Sidebar };

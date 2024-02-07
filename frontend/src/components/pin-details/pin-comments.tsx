@@ -1,5 +1,5 @@
-import PinAddComment from './PinAddComment';
-import PinCommentsList from './PinCommentsList';
+import { PinAddComment } from './pin-add-comment';
+import { PinCommentsList } from './pin-comments-list';
 
 const PinComments = (props: any) => {
   const { pinDetail, pinId, user, fetchPinDetails } = props;
@@ -17,4 +17,4 @@ const PinComments = (props: any) => {
   );
 };
 
-export default PinComments;
+export { PinComments };

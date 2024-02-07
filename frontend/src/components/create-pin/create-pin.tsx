@@ -4,8 +4,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import { client } from 'utils/client';
 import { Spinner } from 'components';
 import { categories } from 'utils/data';
-import ImageUploadArea from './ImageUploadArea';
-import TextfieldArea from './TextfieldArea';
+import { ImageUploadArea } from './image-upload-area';
+import { TextfieldArea } from './textfield-area';
 
 const CreatePin = ({ user }: any) => {
   const [title, setTitle] = useState('');
@@ -59,7 +59,7 @@ const CreatePin = ({ user }: any) => {
     };
     setUploading(true);
 
-    client.create(doc).then((response: any) => {
+    client.create(doc).then(() => {
       setUploading(false);
       navigate('/');
     });
@@ -87,7 +87,7 @@ const CreatePin = ({ user }: any) => {
       )}
       <div className='relative flex w-full flex-col items-center justify-center bg-white p-3 lg:mx-4 lg:flex-row'>
         {uploading && (
-          <div className='absolute top-0 left-0 right-0 bottom-0 z-10 bg-[#ffffffaa]'>
+          <div className='absolute bottom-0 left-0 right-0 top-0 z-10 bg-[#ffffffaa]'>
             <Spinner />
           </div>
         )}
@@ -118,4 +118,4 @@ const CreatePin = ({ user }: any) => {
   );
 };
 
-export default CreatePin;
+export { CreatePin };

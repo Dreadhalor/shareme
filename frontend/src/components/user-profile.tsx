@@ -67,7 +67,7 @@ const UserProfile = () => {
           <div className='flex flex-col items-center justify-center'>
             <img
               src={random_image}
-              className='h-370 w-full object-cover shadow-lg xl:h-510'
+              className='h-370 xl:h-510 w-full object-cover shadow-lg'
               alt='banner'
             />
             <img
@@ -78,10 +78,10 @@ const UserProfile = () => {
             <h1 className='mt-3 text-center text-3xl font-bold'>
               {user.userName}
             </h1>
-            <div className='z-1 absolute top-0 right-0 p-2'>
+            <div className='z-1 absolute right-0 top-0 p-2'>
               {userId === User?.googleId && (
                 <GoogleLogout
-                  clientId={process.env.REACT_APP_GOOGLE_API_TOKEN!}
+                  clientId={import.meta.env.VITE_REACT_APP_GOOGLE_API_TOKEN!}
                   render={(renderProps) => (
                     <button
                       type='button'
@@ -105,8 +105,8 @@ const UserProfile = () => {
             <button
               type='button'
               className={`${getButtonStyle(
-                'created'
-              )} rounded-full py-2 px-4 font-bold shadow-md outline-none`}
+                'created',
+              )} rounded-full px-4 py-2 font-bold shadow-md outline-none`}
               onClick={(e: any) => {
                 setText(e.target.textContent);
                 setActiveBtn('created');
@@ -117,8 +117,8 @@ const UserProfile = () => {
             <button
               type='button'
               className={`${getButtonStyle(
-                'saved'
-              )} rounded-full py-2 px-4 font-bold shadow-md outline-none`}
+                'saved',
+              )} rounded-full px-4 py-2 font-bold shadow-md outline-none`}
               onClick={(e: any) => {
                 setText(e.target.textContent);
                 setActiveBtn('saved');
@@ -136,4 +136,4 @@ const UserProfile = () => {
   );
 };
 
-export default UserProfile;
+export { UserProfile };

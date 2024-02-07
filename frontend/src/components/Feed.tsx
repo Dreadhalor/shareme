@@ -31,4 +31,4 @@ const Feed = () => {
   return <div>{pins && <MasonryLayout pins={pins} />}</div>;
 };
 
-export default Feed;
+export { Feed };

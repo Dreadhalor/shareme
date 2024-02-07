@@ -22,7 +22,7 @@ const PinDetailsHeader = (props: any) => {
             href={pinDetail.destination}
             target='_blank'
             rel='noreferrer'
-            className='flex items-center gap-2 truncate rounded-full bg-white py-2 px-4 text-right font-bold text-black opacity-70 hover:opacity-100 hover:shadow-md'
+            className='flex items-center gap-2 truncate rounded-full bg-white px-4 py-2 text-right font-bold text-black opacity-70 hover:opacity-100 hover:shadow-md'
             onClick={(e) => e.stopPropagation()}
           >
             {pinDetail.destination}
@@ -53,4 +53,4 @@ const PinDetailsHeader = (props: any) => {
   );
 };
 
-export default PinDetailsHeader;
+export { PinDetailsHeader };

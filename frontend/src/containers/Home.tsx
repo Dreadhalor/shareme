@@ -1,12 +1,12 @@
 import { Sidebar, UserProfile } from 'components';
-import logo from 'assets/logo.png';
-import Pins from 'containers/Pins';
+import { Pins } from 'containers/pins';
 import { HiMenu } from 'react-icons/hi';
 import { useEffect, useRef, useState } from 'react';
 import { Link, Route, Routes } from 'react-router-dom';
 import { fetchUser } from 'utils/data';
 import { User } from 'utils/interfaces';
 import { AiFillCloseCircle, AiOutlineLogin } from 'react-icons/ai';
+import logo from 'assets/logo.png';
 
 const Home = () => {
   const [toggleSidebar, setToggleSidebar] = useState(false);
@@ -22,7 +22,7 @@ const Home = () => {
   }, []);
 
   return (
-    <div className='flex h-full flex-col bg-empty transition-height duration-75 ease-out md:flex-row'>
+    <div className='bg-empty transition-height flex h-full flex-col duration-75 ease-out md:flex-row'>
       {/* desktop nav */}
       <div className='hidden h-full flex-initial md:flex'>
         <Sidebar user={user && user} closeToggle={setToggleSidebar} />
@@ -54,7 +54,7 @@ const Home = () => {
         </div>
         {/* mobile sidebar contents */}
         {toggleSidebar && (
-          <div className='fixed top-0 left-0 z-20 h-full animate-slide-in overflow-y-auto bg-white shadow-md'>
+          <div className='animate-slide-in fixed left-0 top-0 z-20 h-full overflow-y-auto bg-white shadow-md'>
             <div className='absolute flex w-full justify-end p-2'>
               <AiFillCloseCircle
                 fontSize={30}
@@ -79,4 +79,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export { Home };

@@ -53,7 +53,7 @@ const PinAddComment = (props: any) => {
           />
           <button
             type='button'
-            className='disabled:cursor-not-allowed rounded-full bg-red-500 px-6 py-2 text-base font-semibold text-white outline-none disabled:opacity-50'
+            className='rounded-full bg-red-500 px-6 py-2 text-base font-semibold text-white outline-none disabled:cursor-not-allowed disabled:opacity-50'
             onClick={addComment}
             disabled={comment.length === 0}
           >
@@ -71,4 +71,4 @@ const PinAddComment = (props: any) => {
   );
 };
 
-export default PinAddComment;
+export { PinAddComment };

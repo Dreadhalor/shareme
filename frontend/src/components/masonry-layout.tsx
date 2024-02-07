@@ -16,12 +16,10 @@ const MasonryLayout = ({ pins }: { pins: IPin[] }) => {
     <div>
       {pins?.length > 0 ? (
         <Masonry
-          className='flex animate-slide-fwd'
+          className='animate-slide-fwd flex'
           breakpointCols={breakpointObject}
         >
-          {pins?.map((pin: IPin) => (
-            <PinCard key={pin._id} pin={pin} />
-          ))}
+          {pins?.map((pin: IPin) => <PinCard key={pin._id} pin={pin} />)}
         </Masonry>
       ) : (
         <div className='mt-2 flex w-full items-center justify-center text-xl font-bold'>
@@ -32,4 +30,4 @@ const MasonryLayout = ({ pins }: { pins: IPin[] }) => {
   );
 };
 
-export default MasonryLayout;
+export { MasonryLayout };

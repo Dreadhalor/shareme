@@ -1,5 +1,5 @@
 import { client } from 'utils/client';
-import Spinner from 'components/Spinner';
+import { Spinner } from 'components';
 import { AiOutlineCloudUpload } from 'react-icons/ai';
 import { MdDelete } from 'react-icons/md';
 
@@ -19,7 +19,7 @@ const ImageUploadArea = (props: any) => {
     const file = e.target.files[0];
     const { type, name } = file;
     const type_parts = type.split('/');
-    let correct_type = type_parts[0] === 'image';
+    const correct_type = type_parts[0] === 'image';
     setWrongImageType(!correct_type);
     if (correct_type) {
       setLoading(true);
@@ -36,20 +36,20 @@ const ImageUploadArea = (props: any) => {
   };
 
   return (
-    <div className='flex w-full min-w-0 flex-0.7 bg-secondaryColor p-3 lg:flex-1'>
+    <div className='flex-0.7 bg-secondaryColor flex w-full min-w-0 p-3 lg:flex-1'>
       <div className='relative h-full w-full'>
         {!(imageAsset || loading) && (
           <label
             htmlFor='upload-image-id'
-            className='absolute top-0 left-0 h-full w-full cursor-pointer'
+            className='absolute left-0 top-0 h-full w-full cursor-pointer'
           ></label>
         )}
         {loading && (
-          <div className='absolute top-0 left-0 right-0 bottom-0 z-10 bg-[#ffffffaa]'>
+          <div className='absolute bottom-0 left-0 right-0 top-0 z-10 bg-[#ffffffaa]'>
             <Spinner />
           </div>
         )}
-        <div className='flex h-420 w-full flex-col items-center justify-center border-2 border-dotted border-gray-300 p-3'>
+        <div className='h-420 flex w-full flex-col items-center justify-center border-2 border-dotted border-gray-300 p-3'>
           {wrongImageType && <p>Wrong image type</p>}
           {!imageAsset ? (
             <div className='h-full w-full'>
@@ -96,4 +96,4 @@ const ImageUploadArea = (props: any) => {
   );
 };
 
-export default ImageUploadArea;
+export { ImageUploadArea };

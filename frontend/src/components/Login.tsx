@@ -11,7 +11,7 @@ import { Link, useNavigate } from 'react-router-dom';
 const Login = () => {
   const navigate = useNavigate();
   const responseGoogle = (
-    response: GoogleLoginResponse | GoogleLoginResponseOffline
+    response: GoogleLoginResponse | GoogleLoginResponseOffline,
   ) => {
     if ('profileObj' in response) {
       const profile = response.profileObj;
@@ -49,19 +49,19 @@ const Login = () => {
           {/* also it works even if I don't use the <source> tag but says 'type' does not exist on HTMLVideoElement */}
           <source src={shareVideo} type='video/mp4'></source>
         </video>
-        <div className='absolute inset-0 flex bg-blackOverlay'>
+        <div className='bg-blackOverlay absolute inset-0 flex'>
           <div className='m-auto flex flex-col'>
             <div className='mx-auto p-5'>
               <img src={logo_white} width='130px' alt='logo'></img>
             </div>
             <div className='mx-auto shadow-2xl'>
               <GoogleLogin
-                clientId={process.env.REACT_APP_GOOGLE_API_TOKEN!}
+                clientId={import.meta.env.VITE_REACT_APP_GOOGLE_API_TOKEN!}
                 render={(renderProps) => (
                   <button
                     type='button'
                     // unclear what 'outline-none' does but maybe it's a cross-compatibility thing
-                    className='flex min-w-0 cursor-pointer flex-row gap-3 rounded-lg bg-mainColor p-3 outline-none'
+                    className='bg-mainColor flex min-w-0 cursor-pointer flex-row gap-3 rounded-lg p-3 outline-none'
                     onClick={renderProps.onClick}
                     disabled={renderProps.disabled}
                   >
@@ -87,4 +87,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export { Login };

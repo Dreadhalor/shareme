@@ -20,20 +20,20 @@ const PinCard = ({ pin }: { pin: IPin }) => {
   const alreadySaved = save_index !== -1;
 
   const toggleSave = (id: string) => {
-    let fields: SavePinFields = {
+    const fields: SavePinFields = {
       id,
       user: user,
       alreadySaved,
       save_index,
     };
     setEditing(true);
-    toggleSavePin(fields).then((res) => {
+    toggleSavePin(fields).then(() => {
       setEditing(false);
     });
   };
 
   const cleanUrl = (url: string) => {
-    let prefixes = ['https://', 'http://', 'www.'];
+    const prefixes = ['https://', 'http://', 'www.'];
     //slice off all prefixes up to the second-level domain
     prefixes.forEach((prefix: string) => {
       if (url.indexOf(prefix) === 0) {
@@ -111,7 +111,7 @@ const PinCard = ({ pin }: { pin: IPin }) => {
                   href={destination}
                   target='blank'
                   rel='noreferrer'
-                  className='flex items-center gap-2 truncate rounded-full bg-white py-2 px-4 text-right font-bold text-black opacity-70 hover:opacity-100 hover:shadow-md'
+                  className='flex items-center gap-2 truncate rounded-full bg-white px-4 py-2 text-right font-bold text-black opacity-70 hover:opacity-100 hover:shadow-md'
                   onClick={(e) => e.stopPropagation()}
                 >
                   <BsFillArrowUpRightCircleFill className='flex-shrink-0' />
@@ -149,4 +149,4 @@ const PinCard = ({ pin }: { pin: IPin }) => {
   );
 };
 
-export default PinCard;
+export { PinCard };

@@ -1,9 +1,5 @@
-module.exports = {
-  content: ['./src/**/*.{js,jsx,ts,tsx}', './public/index.html'],
-  // purge: {
-  //   enabled: false,
-  //   content: ['./src/**/*.{js,jsx,ts,tsx}', './public/index.html'],
-  // },
+export default {
+  content: ['./src/**/*.{js,jsx,ts,tsx}', './index.html'],
   theme: {
     extend: {
       margin: {

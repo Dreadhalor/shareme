@@ -3,7 +3,7 @@ import { MasonryLayout, Spinner } from 'components';
 import { client } from 'utils/client';
 import { feedQuery, searchQuery } from 'utils/data';
 
-const Search = ({ searchTerm, setSearchTerm }: any) => {
+const Search = ({ searchTerm }: any) => {
   const [pins, setPins] = useState<any>(null);
   const [loading, setLoading] = useState(true);
 
@@ -25,7 +25,6 @@ const Search = ({ searchTerm, setSearchTerm }: any) => {
 
   return (
     <div>
-      {/* {searchTerm} */}
       {loading ? (
         <Spinner message='Searching for pins...' />
       ) : (
@@ -35,4 +34,4 @@ const Search = ({ searchTerm, setSearchTerm }: any) => {
   );
 };
 
-export default Search;
+export { Search };

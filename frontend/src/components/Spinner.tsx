@@ -9,4 +9,4 @@ const Spinner = (props: any) => {
   );
 };
 
-export default Spinner;
+export { Spinner };

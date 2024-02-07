@@ -27,9 +27,7 @@ const Pins = (props: any) => {
           ></Route>
           <Route
             path='/search'
-            element={
-              <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
-            }
+            element={<Search searchTerm={searchTerm} />}
           ></Route>
         </Routes>
       </div>
@@ -37,4 +35,4 @@ const Pins = (props: any) => {
   );
 };
 
-export default Pins;
+export { Pins };

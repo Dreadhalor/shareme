@@ -3,8 +3,8 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { pinDetailMorePinQuery, pinDetailQuery } from 'utils/data';
 import { Spinner, MasonryLayout } from 'components';
-import PinComments from './PinComments';
-import PinDetailsHeader from './PinDetailsHeader';
+import { PinComments } from './pin-comments';
+import { PinDetailsHeader } from './pin-details-header';
 
 const PinDetails = (props: any) => {
   const { user } = props;
@@ -46,7 +46,7 @@ const PinDetails = (props: any) => {
             src={pinDetail?.image && urlFor(pinDetail.image).url()}
           />
         </div>
-        <div className='w-full flex-1 p-5 xl:min-w-620'>
+        <div className='xl:min-w-620 w-full flex-1 p-5'>
           <PinDetailsHeader pinDetail={pinDetail} />
           <PinComments
             pinDetail={pinDetail}
@@ -58,7 +58,7 @@ const PinDetails = (props: any) => {
       </div>
       {pins?.length > 0 && (
         <>
-          <h2 className='mt-8 mb-4 text-center text-2xl font-bold'>
+          <h2 className='mb-4 mt-8 text-center text-2xl font-bold'>
             More like this
           </h2>
           <MasonryLayout pins={pins} />
@@ -68,4 +68,4 @@ const PinDetails = (props: any) => {
   );
 };
 
-export default PinDetails;
+export { PinDetails };

@@ -1,11 +1,12 @@
-export { default as Sidebar } from 'components/Sidebar';
-export { default as UserProfile } from 'components/UserProfile';
-export { default as Login } from 'components/Login';
-export { default as SearchBar } from 'components/SearchBar';
-export { default as Feed } from 'components/Feed';
-export { default as PinDetails } from 'components/PinDetails/PinDetails';
-export { default as CreatePin } from 'components/CreatePin/CreatePin';
-export { default as Search } from 'components/Search';
-export { default as MasonryLayout } from 'components/MasonryLayout';
-export { default as Spinner } from 'components/Spinner';
-export { default as PinCard } from 'components/PinCard';
+/* eslint-disable react-refresh/only-export-components */
+export * from 'components/sidebar';
+export * from 'components/user-profile';
+export * from 'components/login';
+export * from 'components/search-bar';
+export * from 'components/feed';
+export * from 'components/pin-details/pin-details';
+export * from 'components/create-pin/create-pin';
+export * from 'components/search';
+export * from 'components/masonry-layout';
+export * from 'components/spinner';
+export * from 'components/pin-card';

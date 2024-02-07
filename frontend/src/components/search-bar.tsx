@@ -56,4 +56,4 @@ const SearchBar = ({ searchTerm, setSearchTerm, user }: any) => {
   );
 };
 
-export default SearchBar;
+export { SearchBar };

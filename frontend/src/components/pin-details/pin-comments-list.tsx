@@ -4,7 +4,7 @@ const PinCommentsList = (props: any) => {
   const { pinDetail } = props;
 
   return (
-    <div className='flex max-h-370 flex-col gap-5 overflow-y-auto rounded-md border-4 border-gray-100 p-2'>
+    <div className='max-h-370 flex flex-col gap-5 overflow-y-auto rounded-md border-4 border-gray-100 p-2'>
       {pinDetail?.comments?.length ? (
         pinDetail?.comments?.map((comment: any, index: number) => (
           <div
@@ -39,4 +39,4 @@ const PinCommentsList = (props: any) => {
   );
 };
 
-export default PinCommentsList;
+export { PinCommentsList };

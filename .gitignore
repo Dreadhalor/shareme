@@ -7,7 +7,7 @@ frontend/src/assets
 frontend/.env
 
 #build
-frontend/build
+frontend/dist
 
 /.pnp
 .pnp.js

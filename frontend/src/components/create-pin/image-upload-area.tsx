@@ -1,9 +1,9 @@
-import { client } from 'utils/client';
-import { Spinner } from 'components';
+import { client } from '@shareme/utils/client';
+import { Spinner, useCreatePin } from '@shareme/components';
 import { AiOutlineCloudUpload } from 'react-icons/ai';
 import { MdDelete } from 'react-icons/md';
 
-const ImageUploadArea = (props: any) => {
+const ImageUploadArea = () => {
   const {
     loading,
     setLoading,
@@ -12,8 +12,9 @@ const ImageUploadArea = (props: any) => {
     setImageAsset,
     wrongImageType,
     setWrongImageType,
-  } = props;
+  } = useCreatePin();
 
+  // eslint-disable-next-line
   const uploadImage = (e: any) => {
     setFields(false);
     const file = e.target.files[0];
@@ -25,18 +26,18 @@ const ImageUploadArea = (props: any) => {
       setLoading(true);
       client.assets
         .upload('image', file, { contentType: type, filename: name })
-        .then((document: any) => {
+        .then((document) => {
           setImageAsset(document);
           setLoading(false);
         })
-        .catch((error: any) => {
+        .catch((error) => {
           console.log('Image upload error:', error);
         });
     }
   };
 
   return (
-    <div className='flex-0.7 bg-secondaryColor flex w-full min-w-0 p-3 lg:flex-1'>
+    <div className='bg-empty flex w-full min-w-0 p-3 lg:flex-1'>
       <div className='relative h-full w-full'>
         {!(imageAsset || loading) && (
           <label
@@ -49,7 +50,7 @@ const ImageUploadArea = (props: any) => {
             <Spinner />
           </div>
         )}
-        <div className='h-420 flex w-full flex-col items-center justify-center border-2 border-dotted border-gray-300 p-3'>
+        <div className='flex h-[420px] w-full flex-col items-center justify-center border-2 border-dotted border-gray-300 p-3'>
           {wrongImageType && <p>Wrong image type</p>}
           {!imageAsset ? (
             <div className='h-full w-full'>
@@ -60,7 +61,7 @@ const ImageUploadArea = (props: any) => {
                   </p>
                   <p className='text-lg'>Click to upload</p>
                 </div>
-                {/* <p className='text-center text-gray-400'>(20MB limit)</p> */}
+                <p className='text-center text-gray-400'>(20MB limit)</p>
               </div>
               <input
                 type='file'

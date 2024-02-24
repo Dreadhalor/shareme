@@ -1,14 +1,13 @@
 import { Link, NavLink } from 'react-router-dom';
 import { RiHomeFill } from 'react-icons/ri';
-import { User } from 'utils/interfaces';
 import { Dispatch, SetStateAction } from 'react';
-import { categories } from 'utils/data';
+import { categories } from '@shareme/utils/data';
 import { IoIosArrowForward } from 'react-icons/io';
-import logo from 'assets/logo.png';
-import login_icon from 'assets/login-icon.svg';
+import logo from '@shareme/assets/logo.png';
+import { UserAvatar, useAuth } from 'dread-ui';
+import { cn } from '@repo/utils';
 
 type Props = {
-  user: User;
   closeToggle: Dispatch<SetStateAction<boolean>>;
 };
 
@@ -17,16 +16,17 @@ const isNotActiveStyle =
 const isActiveStyle =
   'flex items-center gap-3 border-r-2 border-black px-5 font-extrabold capitalize transition-all duration-200 ease-in-out';
 
-const Sidebar = ({ user, closeToggle }: Props) => {
+const Sidebar = ({ closeToggle }: Props) => {
+  const { uid, displayName, signedIn, loading } = useAuth();
   const handleCloseSidebar = () => {
     if (closeToggle) closeToggle(false);
   };
   return (
-    <div className='hide-scrollbar min-w-210 flex h-full flex-col justify-between overflow-y-auto bg-white'>
+    <div className='hide-scrollbar flex h-full w-[230px] flex-col justify-between overflow-y-auto bg-white'>
       <div className='flex flex-col'>
         <Link
           to='/'
-          className='w-190 my-6 flex items-center gap-2 px-5 pt-1'
+          className='my-6 flex w-[190px] items-center gap-2 px-5 pt-1'
           onClick={handleCloseSidebar}
         >
           <img src={logo} alt='logo' className='w-full' />
@@ -64,32 +64,28 @@ const Sidebar = ({ user, closeToggle }: Props) => {
           ))}
         </div>
       </div>
-      {user ? (
-        <Link
-          to={`/user-profile/${user._id}`}
-          className='mx-3 my-5 mb-3 flex items-center gap-2 rounded-lg border border-slate-200 bg-white p-2 shadow-lg'
-        >
-          <img
-            src={user.image}
-            className='h-10 w-10 rounded-full'
-            alt='user-profile'
-          />
-          <p>{user.userName}</p>
-          <IoIosArrowForward className='h-5 w-5' />
-        </Link>
-      ) : (
-        <Link
-          to={'/login'}
-          className='mx-3 my-5 mb-3 flex items-center gap-2 rounded-lg border border-slate-200 bg-white p-2 shadow-lg'
-        >
-          <img
-            src={login_icon}
-            className='h-10 w-10 rounded-full contrast-[0.1]'
-            alt='login'
-          />
-          <p className='mx-auto text-gray-500'>Not logged in</p>
-        </Link>
-      )}
+      <Link
+        to={signedIn ? `/user-profile/${uid}` : '/login'}
+        className={cn(
+          'mx-3 my-5 mb-3 flex items-center gap-2 rounded-lg border border-slate-200 bg-white p-2 shadow-lg',
+          !signedIn && 'text-gray-500',
+        )}
+      >
+        <UserAvatar
+          className='ml-1 h-10 w-10 rounded-full border border-gray-300'
+          loading={loading}
+          uid={uid}
+          signedIn={signedIn}
+        />
+        {signedIn ? (
+          <>
+            <p>{displayName}</p>
+            <IoIosArrowForward className='ml-auto h-5 w-5' />
+          </>
+        ) : (
+          <p className='mx-auto'>Not logged in</p>
+        )}
+      </Link>
     </div>
   );
 };

@@ -1,8 +1,10 @@
+import { UserAvatar } from 'dread-ui';
 import { MdDownloadForOffline } from 'react-icons/md';
 import { Link } from 'react-router-dom';
 
 const PinDetailsHeader = (props: any) => {
   const { pinDetail } = props;
+
   return (
     <>
       <div className='flex items-center justify-between'>
@@ -40,10 +42,11 @@ const PinDetailsHeader = (props: any) => {
         // it don't matter at all that we're rounding the borders because the background is white but whatever
         className='mt-5 flex items-center gap-2 rounded-lg bg-white'
       >
-        <img
-          className='h-8 w-8 rounded-full object-cover'
-          src={pinDetail?.postedBy?.image}
-          alt='user-profile'
+        <UserAvatar
+          className='h-8 w-8'
+          uid={pinDetail?.postedBy?._id}
+          signedIn={true}
+          loading={false}
         />
         <p className='font-semibold capitalize'>
           {pinDetail?.postedBy?.userName}

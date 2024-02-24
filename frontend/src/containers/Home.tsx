@@ -1,31 +1,25 @@
-import { Sidebar, UserProfile } from 'components';
-import { Pins } from 'containers/pins';
+import { Sidebar, UserProfile } from '@shareme/components';
+import { Pins } from '@shareme/containers/pins';
 import { HiMenu } from 'react-icons/hi';
-import { useEffect, useRef, useState } from 'react';
-import { Link, Route, Routes } from 'react-router-dom';
-import { fetchUser } from 'utils/data';
-import { User } from 'utils/interfaces';
-import { AiFillCloseCircle, AiOutlineLogin } from 'react-icons/ai';
-import logo from 'assets/logo.png';
+import { useRef, useState } from 'react';
+import { Link, Route, Routes, useNavigate } from 'react-router-dom';
+import { AiFillCloseCircle } from 'react-icons/ai';
+import logo from '@shareme/assets/logo.png';
+import { DropdownMenuItem, UserMenu, useAuth } from 'dread-ui';
 
 const Home = () => {
   const [toggleSidebar, setToggleSidebar] = useState(false);
   // don't know why I'm not allowed to set this to null on startup but whatever
-  const [user, setUser] = useState<User>(null as any);
+  const { signedIn, uid } = useAuth();
+  const navigate = useNavigate();
 
   const scrollRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    fetchUser().then((user) => setUser(user));
-    let ref = scrollRef.current;
-    ref?.scrollTo(0, 0);
-  }, []);
-
   return (
-    <div className='bg-empty transition-height flex h-full flex-col duration-75 ease-out md:flex-row'>
+    <div className='bg-empty flex h-full flex-col transition-[height] duration-75 ease-out md:flex-row'>
       {/* desktop nav */}
       <div className='hidden h-full flex-initial md:flex'>
-        <Sidebar user={user && user} closeToggle={setToggleSidebar} />
+        <Sidebar closeToggle={setToggleSidebar} />
       </div>
       {/* mobile nav */}
       <div className='z-10 flex flex-row bg-white shadow-md md:hidden'>
@@ -38,19 +32,19 @@ const Home = () => {
           <Link to='/'>
             <img src={logo} alt='logo' className='w-28' />
           </Link>
-          {user ? (
-            <Link to={`/user-profile/${user?._id}`}>
-              <img
-                src={user?.image}
-                alt='logo'
-                className='h-9 w-9 rounded-full'
-              />
-            </Link>
-          ) : (
-            <Link to={'/login'}>
-              <AiOutlineLogin fontSize={40} />
-            </Link>
-          )}
+          <UserMenu
+            className='h-9 w-9'
+            onLogout={() => navigate('/login')}
+            skipAchievements
+          >
+            {signedIn && (
+              <DropdownMenuItem
+                onSelect={() => navigate(`/user-profile/${uid}`)}
+              >
+                View profile
+              </DropdownMenuItem>
+            )}
+          </UserMenu>
         </div>
         {/* mobile sidebar contents */}
         {toggleSidebar && (
@@ -62,7 +56,7 @@ const Home = () => {
                 onClick={() => setToggleSidebar(false)}
               />
             </div>
-            <Sidebar user={user && user} closeToggle={setToggleSidebar} />
+            <Sidebar closeToggle={setToggleSidebar} />
           </div>
         )}
       </div>
@@ -72,7 +66,7 @@ const Home = () => {
       >
         <Routes>
           <Route path='/user-profile/:userId' element={<UserProfile />} />
-          <Route path='/*' element={<Pins user={user && user} />} />
+          <Route path='/*' element={<Pins />} />
         </Routes>
       </div>
     </div>

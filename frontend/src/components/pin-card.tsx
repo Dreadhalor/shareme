@@ -1,11 +1,16 @@
-import { deletePin, SavePinFields, toggleSavePin, urlFor } from 'utils/client';
+import {
+  deletePin,
+  SavePinFields,
+  toggleSavePin,
+  urlFor,
+} from '@shareme/utils/client';
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { IPin } from 'utils/interfaces';
+import { IPin } from '@shareme/utils/interfaces';
 import { MdDownloadForOffline } from 'react-icons/md';
 import { AiTwotoneDelete } from 'react-icons/ai';
 import { BsFillArrowUpRightCircleFill } from 'react-icons/bs';
-import { getUserFromLocalStorage } from 'utils/data';
+import { useAuth, UserAvatar } from 'dread-ui';
 
 const PinCard = ({ pin }: { pin: IPin }) => {
   const { postedBy, save, _id, image, destination } = pin;
@@ -13,16 +18,17 @@ const PinCard = ({ pin }: { pin: IPin }) => {
   const [editing, setEditing] = useState(false);
 
   const navigate = useNavigate();
-  const user = getUserFromLocalStorage();
+  const { signedIn, uid } = useAuth();
   const save_length = save?.length ?? 0;
   const save_index =
-    save?.findIndex((item) => item.postedBy?._id === user?.googleId) ?? -1;
+    save?.findIndex((item) => item.postedBy?._id === uid) ?? -1;
   const alreadySaved = save_index !== -1;
 
   const toggleSave = (id: string) => {
     const fields: SavePinFields = {
       id,
-      user: user,
+      uid,
+      signedIn,
       alreadySaved,
       save_index,
     };
@@ -118,7 +124,7 @@ const PinCard = ({ pin }: { pin: IPin }) => {
                   <span className='truncate'>{cleanUrl(destination)}</span>
                 </a>
               )}
-              {postedBy?._id === user?.googleId && (
+              {postedBy?._id === uid && (
                 <button
                   type='button'
                   className='text-dark rounded-3xl bg-white p-2 text-base font-bold opacity-70 outline-none hover:opacity-100 hover:shadow-md'
@@ -138,10 +144,11 @@ const PinCard = ({ pin }: { pin: IPin }) => {
         to={`/user-profile/${postedBy?._id}`}
         className='mt-2 flex items-center gap-2'
       >
-        <img
-          className='h-8 w-8 rounded-full object-cover'
-          src={postedBy?.image}
-          alt='user-profile'
+        <UserAvatar
+          className='h-8 w-8'
+          uid={postedBy?._id}
+          signedIn={true}
+          loading={false}
         />
         <p className='font-semibold capitalize'>{postedBy?.userName}</p>
       </Link>

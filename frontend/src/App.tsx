@@ -1,6 +1,6 @@
 import { Route, Routes } from 'react-router-dom';
-import { Login } from 'components';
-import { Home } from 'containers/home';
+import { Login } from '@shareme/components';
+import { Home } from '@shareme/containers/home';
 
 const App = () => {
   return (

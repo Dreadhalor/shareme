@@ -23,25 +23,27 @@ export const SanityWrapper = () => {};
 
 export interface SavePinFields {
   id: string;
-  user: any;
+  uid: string | null;
+  signedIn: boolean;
   alreadySaved: boolean;
   save_index: number;
 }
 
 export const toggleSavePin = ({
   id,
-  user,
+  uid,
+  signedIn,
   alreadySaved,
   save_index,
 }: SavePinFields) => {
-  if (!user) {
+  if (!signedIn) {
     alert('Log in to save pins!');
     return Promise.resolve(false);
   }
   if (alreadySaved) {
     return deleteSave({ id, save_index });
   } else {
-    return addSave({ id, user_id: user?.googleId });
+    return addSave({ id, user_id: uid });
   }
 };
 

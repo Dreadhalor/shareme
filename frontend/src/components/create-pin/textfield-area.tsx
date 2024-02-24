@@ -1,94 +1,108 @@
-const TextfieldArea = (props: any) => {
+import {
+  Button,
+  Input,
+  Label,
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+  UserAvatar,
+  useAuth,
+} from 'dread-ui';
+import { useCreatePin } from './create-pin';
+import { type Category, categories } from '@shareme/utils/data';
+
+const TextfieldArea = () => {
   const {
     setFields,
-    user,
     title,
     setTitle,
     about,
     setAbout,
     destination,
     setDestination,
-    categories,
+    category,
     setCategory,
     uploadPin,
-  } = props;
+  } = useCreatePin();
+
+  const { uid, displayName, loading, signedIn } = useAuth();
 
   return (
-    <div className='mt-5 flex w-full flex-1 flex-col gap-6 overflow-auto lg:pl-5'>
-      <input
-        type='text'
+    <div className='mt-5 flex w-full flex-1 flex-col gap-6 lg:pl-5'>
+      <Input
+        placeholder='Add your title here'
+        className='h-auto p-2 text-3xl font-bold'
         value={title}
         onChange={(e) => {
           setFields(false);
           setTitle(e.target.value);
         }}
-        placeholder='Add your title here'
-        className='border-b-2 border-gray-200 p-2 text-2xl font-bold outline-none sm:text-3xl'
       />
-      {user && (
+      {signedIn && (
         <div className='my-2 flex items-center gap-2 rounded-lg bg-white'>
-          <img
-            src={user.image}
-            alt='User profile'
-            className='h-10 w-10 rounded-full'
+          <UserAvatar
+            className='h-10 w-10 rounded-full border'
+            loading={loading}
+            uid={uid}
+            signedIn={signedIn}
           />
-          <p className='font-bold'>{user.userName}</p>
+          <p className='font-bold'>{displayName}</p>
         </div>
       )}
-      <input
-        type='text'
+      <Input
+        placeholder='What is your pin about?'
         value={about}
         onChange={(e) => {
           setFields(false);
           setAbout(e.target.value);
         }}
-        placeholder='What is your pin about?'
-        className='border-b-2 border-gray-200 p-2 text-base font-bold outline-none sm:text-lg'
       />
-      <input
-        type='text'
+      <Input
+        placeholder='Add a destination link!'
         value={destination}
         onChange={(e) => {
           setFields(false);
           setDestination(e.target.value);
         }}
-        placeholder='Add a destination link!'
-        className='border-b-2 border-gray-200 p-2 text-base font-bold outline-none sm:text-lg'
       />
       <div className='flex flex-col'>
-        <div>
-          <p className='mb-2 text-lg font-semibold sm:text-xl'>
-            Choose pin category
-          </p>
-          <select
-            onChange={(e) => {
-              setFields(false);
-              setCategory(e.target.value);
-            }}
-            className='w-4/5 cursor-pointer rounded-md border-b-2 border-gray-200 p-2 text-base capitalize outline-none'
+        <div className='flex flex-col gap-1'>
+          <Label
+            htmlFor='category-select'
+            className='text-lg font-semibold sm:text-xl'
           >
-            <option value='other' className='bg-white'>
-              Select Category
-            </option>
-            {categories.map((category: any) => (
-              <option
-                key={category.name}
-                value={category.name}
-                className='border-0 bg-white text-base text-black outline-none'
-              >
-                {category.name}
-              </option>
-            ))}
-          </select>
+            Choose pin category
+          </Label>
+          <Select
+            onValueChange={(str) => {
+              setFields(false);
+              setCategory(str);
+            }}
+          >
+            <SelectTrigger id='category-select' className='capitalize'>
+              <SelectValue placeholder='select category'>
+                {category}
+              </SelectValue>
+            </SelectTrigger>
+            <SelectContent>
+              {categories.map((category: Category) => (
+                <SelectItem
+                  key={category.name}
+                  value={category.name}
+                  className='capitalize'
+                >
+                  {category.name}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
         </div>
         <div className='mt-5 flex items-end justify-end'>
-          <button
-            type='button'
-            className='w-28 rounded-full bg-red-500 p-2 font-bold text-white outline-none'
-            onClick={uploadPin}
-          >
+          <Button onClick={uploadPin} className='bg-red-500 text-white'>
             Create Pin!
-          </button>
+          </Button>
         </div>
       </div>
     </div>

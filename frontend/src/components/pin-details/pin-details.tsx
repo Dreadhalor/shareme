@@ -1,14 +1,12 @@
-import { client, urlFor } from 'utils/client';
+import { client, urlFor } from '@shareme/utils/client';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { pinDetailMorePinQuery, pinDetailQuery } from 'utils/data';
-import { Spinner, MasonryLayout } from 'components';
+import { pinDetailMorePinQuery, pinDetailQuery } from '@shareme/utils/data';
+import { Spinner, MasonryLayout } from '@shareme/components';
 import { PinComments } from './pin-comments';
 import { PinDetailsHeader } from './pin-details-header';
 
-const PinDetails = (props: any) => {
-  const { user } = props;
-
+const PinDetails = () => {
   const [pins, setPins] = useState<any>(null);
   const [pinDetail, setPinDetail] = useState<any>(null);
 
@@ -46,12 +44,11 @@ const PinDetails = (props: any) => {
             src={pinDetail?.image && urlFor(pinDetail.image).url()}
           />
         </div>
-        <div className='xl:min-w-620 w-full flex-1 p-5'>
+        <div className='w-full flex-1 p-5 xl:min-w-[620px]'>
           <PinDetailsHeader pinDetail={pinDetail} />
           <PinComments
             pinDetail={pinDetail}
             pinId={pinId}
-            user={user}
             fetchPinDetails={fetchPinDetails}
           />
         </div>

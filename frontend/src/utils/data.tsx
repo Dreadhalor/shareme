@@ -1,5 +1,5 @@
-import { client } from 'utils/client';
-import { IPin, User } from 'utils/interfaces';
+import { client } from '@shareme/utils/client';
+import { IPin, User } from '@shareme/utils/interfaces';
 
 export const userQuery = (userId: string) => {
   const query = `*[_type == 'user' && _id == '${userId}']`;
@@ -8,7 +8,7 @@ export const userQuery = (userId: string) => {
 export const searchQuery = (searchTerm: string) => {
   const match_options = ['title', 'category', 'about'];
   const match_strings = match_options.map(
-    (field) => `${field} match '${searchTerm}*'`
+    (field) => `${field} match '${searchTerm}*'`,
   );
   const match_string = match_strings.join(' || ');
   const query = `*[_type == 'pin' && ${match_string}]`;
@@ -190,11 +190,6 @@ export const categories = [
     image:
       'https://i.pinimg.com/236x/c3/33/18/c3331885677e5252dcbb7fa4b615aa53.jpg',
   },
-  // {
-  //   name: 'photo',
-  //   image:
-  //     'https://i.pinimg.com/236x/72/8c/b4/728cb43f48ca762a75da645c121e5c57.jpg',
-  // },
   {
     name: 'food',
     image:
@@ -235,4 +230,5 @@ export const categories = [
     image:
       'https://i.pinimg.com/236x/2e/63/c8/2e63c82dfd49aca8dccf9de3f57e8588.jpg',
   },
-];
+] as const;
+export type Category = (typeof categories)[number];

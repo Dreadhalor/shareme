@@ -1,10 +1,11 @@
+import { UserAvatar } from 'dread-ui';
 import { Link } from 'react-router-dom';
 
 const PinCommentsList = (props: any) => {
   const { pinDetail } = props;
 
   return (
-    <div className='max-h-370 flex flex-col gap-5 overflow-y-auto rounded-md border-4 border-gray-100 p-2'>
+    <div className='flex max-h-[370px] flex-col gap-5 overflow-y-auto rounded-md border-4 border-gray-100 p-2'>
       {pinDetail?.comments?.length ? (
         pinDetail?.comments?.map((comment: any, index: number) => (
           <div
@@ -15,10 +16,11 @@ const PinCommentsList = (props: any) => {
               to={`/user-profile/${comment?.postedBy?._id}`}
               className='mb-auto flex-shrink-0'
             >
-              <img
-                className='h-10 w-10 cursor-pointer rounded-full object-cover'
-                src={comment.postedBy.image}
-                alt='user-profile'
+              <UserAvatar
+                className='h-10 w-10'
+                uid={comment?.postedBy?._id}
+                signedIn={true}
+                loading={false}
               />
             </Link>
             <div className='flex min-w-0 flex-col'>

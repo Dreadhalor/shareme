@@ -1,6 +1,6 @@
 import Masonry from 'react-masonry-css';
-import { IPin } from 'utils/interfaces';
-import { PinCard } from 'components';
+import { IPin } from '@shareme/utils/interfaces';
+import { PinCard } from '@shareme/components';
 
 const MasonryLayout = ({ pins }: { pins: IPin[] }) => {
   const breakpointObject = {

@@ -1,10 +1,12 @@
-import { client } from 'utils/client';
+import { client } from '@shareme/utils/client';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
+import { UserAvatar, useAuth } from 'dread-ui';
 
 const PinAddComment = (props: any) => {
-  const { pinId, user, fetchPinDetails } = props;
+  const { pinId, fetchPinDetails } = props;
+  const { signedIn, uid, loading } = useAuth();
 
   const [comment, setComment] = useState('');
   const [addingComment, setAddingComment] = useState(false);
@@ -17,7 +19,7 @@ const PinAddComment = (props: any) => {
         _key: uuidv4(),
         postedBy: {
           _type: 'postedBy',
-          _ref: user._id,
+          _ref: uid,
         },
       };
       client
@@ -35,13 +37,14 @@ const PinAddComment = (props: any) => {
 
   return (
     <div className='mt-2 flex flex-wrap gap-3'>
-      {user ? (
+      {signedIn ? (
         <>
-          <Link to={`/user-profile/${user._id}`} className='flex items-center'>
-            <img
-              className='h-10 w-10 cursor-pointer rounded-full object-cover'
-              src={user.image}
-              alt='user-profile'
+          <Link to={`/user-profile/${uid}`} className='flex items-center'>
+            <UserAvatar
+              className='h-10 w-10'
+              signedIn={signedIn}
+              uid={uid}
+              loading={loading}
             />
           </Link>
           <input

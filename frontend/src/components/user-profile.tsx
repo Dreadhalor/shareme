@@ -1,37 +1,26 @@
-import { client } from 'utils/client';
+import { client } from '@shareme/utils/client';
 import { useEffect, useState } from 'react';
-import { GoogleLogout } from 'react-google-login';
 import { AiOutlineLogout } from 'react-icons/ai';
 import { useNavigate, useParams } from 'react-router-dom';
 import {
-  getUserFromLocalStorage,
   userCreatedPinsQuery,
   userQuery,
   userSavedPinsQuery,
-} from 'utils/data';
-import { MasonryLayout, Spinner } from 'components';
+} from '@shareme/utils/data';
+import { MasonryLayout, Spinner } from '@shareme/components';
+import { Button, UserAvatar, useAuth } from 'dread-ui';
+import { cn } from '@repo/utils';
+import { IPin, User } from '@shareme/utils/interfaces';
 
 const UserProfile = () => {
-  const [user, setUser] = useState<any>(null);
-  const [pins, setPins] = useState<any>(null);
+  const [user, setUser] = useState<User | null>(null);
+  const [pins, setPins] = useState<IPin[]>([]);
   const [text, setText] = useState('Created');
   const [activeBtn, setActiveBtn] = useState('created');
 
   const navigate = useNavigate();
   const { userId } = useParams();
-
-  const logout = () => {
-    localStorage.clear();
-    navigate('/login');
-  };
-
-  const getButtonStyle = (btn: string) => {
-    return activeBtn === btn
-      ? 'bg-red-500 text-white'
-      : 'bg-primary text-black';
-  };
-
-  const User = getUserFromLocalStorage();
+  const { handleLogout } = useAuth();
 
   const random_image =
     'https://source.unsplash.com/800x450/?nature,photography';
@@ -67,65 +56,65 @@ const UserProfile = () => {
           <div className='flex flex-col items-center justify-center'>
             <img
               src={random_image}
-              className='h-370 xl:h-510 w-full object-cover shadow-lg'
+              className='h-[370px] w-full object-cover shadow-lg xl:h-[510px]'
               alt='banner'
             />
-            <img
-              className='-mt-10 h-20 w-20 rounded-full object-cover shadow-xl'
-              src={user.image}
-              alt='user'
+            <UserAvatar
+              className='-mt-10 h-20 w-20 rounded-full shadow-xl'
+              loading={false}
+              uid={userId ?? ''}
+              signedIn={true}
             />
             <h1 className='mt-3 text-center text-3xl font-bold'>
-              {user.userName}
+              {user?.userName}
             </h1>
-            <div className='z-1 absolute right-0 top-0 p-2'>
-              {userId === User?.googleId && (
-                <GoogleLogout
-                  clientId={import.meta.env.VITE_REACT_APP_GOOGLE_API_TOKEN!}
-                  render={(renderProps) => (
-                    <button
-                      type='button'
-                      className='cursor-pointer rounded-full bg-white p-2 shadow-md outline-none'
-                      onClick={renderProps.onClick}
-                      disabled={renderProps.disabled}
-                    >
-                      <AiOutlineLogout
-                        color='red'
-                        fontSize={21}
-                        className='my-auto'
-                      />
-                    </button>
-                  )}
-                  onLogoutSuccess={logout}
-                />
+            <div className='z-1 absolute right-0 top-0 hidden p-2 md:flex'>
+              {userId && (
+                <button
+                  type='button'
+                  className='cursor-pointer rounded-full bg-white p-2 shadow-md outline-none'
+                  onClick={() => {
+                    handleLogout().then((loggedOut) => {
+                      if (loggedOut) navigate('/login');
+                    });
+                  }}
+                >
+                  <AiOutlineLogout
+                    color='red'
+                    fontSize={21}
+                    className='my-auto'
+                  />
+                </button>
               )}
             </div>
           </div>
           <div className='mb-4 mt-2 flex flex-row justify-center gap-2 text-center'>
-            <button
-              type='button'
-              className={`${getButtonStyle(
-                'created',
-              )} rounded-full px-4 py-2 font-bold shadow-md outline-none`}
-              onClick={(e: any) => {
-                setText(e.target.textContent);
+            <Button
+              variant={activeBtn === 'created' ? 'default' : 'outline'}
+              className={cn(
+                activeBtn === 'created' &&
+                  'bg-red-500 text-white hover:bg-red-500',
+              )}
+              onClick={() => {
                 setActiveBtn('created');
+                setText('Created');
               }}
             >
               Created
-            </button>
-            <button
-              type='button'
-              className={`${getButtonStyle(
-                'saved',
-              )} rounded-full px-4 py-2 font-bold shadow-md outline-none`}
-              onClick={(e: any) => {
-                setText(e.target.textContent);
+            </Button>
+            <Button
+              variant={activeBtn === 'saved' ? 'default' : 'outline'}
+              className={cn(
+                activeBtn === 'saved' &&
+                  'bg-red-500 text-white hover:bg-red-500',
+              )}
+              onClick={() => {
                 setActiveBtn('saved');
+                setText('Saved');
               }}
             >
               Saved
-            </button>
+            </Button>
           </div>
           <div className='px-2'>
             <MasonryLayout pins={pins} />

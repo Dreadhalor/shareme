@@ -2,11 +2,12 @@ import { client } from '@shareme/utils/client';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
-import { UserAvatar, useAuth } from 'dread-ui';
+import { UserAvatar, useAchievements, useAuth } from 'dread-ui';
 
 const PinAddComment = (props: any) => {
   const { pinId, fetchPinDetails } = props;
   const { signedIn, uid, loading } = useAuth();
+  const { unlockAchievementById } = useAchievements();
 
   const [comment, setComment] = useState('');
   const [addingComment, setAddingComment] = useState(false);
@@ -31,6 +32,7 @@ const PinAddComment = (props: any) => {
           fetchPinDetails();
           setComment('');
           setAddingComment(false);
+          unlockAchievementById('add_comment', 'shareme');
         });
     }
   };

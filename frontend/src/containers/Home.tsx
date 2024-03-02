@@ -32,11 +32,7 @@ const Home = () => {
           <Link to='/'>
             <img src={logo} alt='logo' className='w-28' />
           </Link>
-          <UserMenu
-            className='h-9 w-9'
-            onLogout={() => navigate('/login')}
-            skipAchievements
-          >
+          <UserMenu className='h-9 w-9' onLogout={() => navigate('/login')}>
             {signedIn && (
               <DropdownMenuItem
                 onSelect={() => navigate(`/user-profile/${uid}`)}

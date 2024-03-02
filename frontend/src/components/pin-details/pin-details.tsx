@@ -5,6 +5,7 @@ import { pinDetailMorePinQuery, pinDetailQuery } from '@shareme/utils/data';
 import { Spinner, MasonryLayout } from '@shareme/components';
 import { PinComments } from './pin-comments';
 import { PinDetailsHeader } from './pin-details-header';
+import { useAchievements } from '@dread-ui/index';
 
 const PinDetails = () => {
   const [pins, setPins] = useState<any>(null);
@@ -12,6 +13,7 @@ const PinDetails = () => {
 
   //useParams allows me to get the pinId from the url
   const { pinId } = useParams();
+  const { unlockAchievementById, isUnlockable } = useAchievements();
 
   const fetchPinDetails = async () => {
     let query = pinDetailQuery(pinId!);
@@ -27,6 +29,8 @@ const PinDetails = () => {
 
   useEffect(() => {
     fetchPinDetails();
+    if (isUnlockable('view_pin', 'shareme'))
+      unlockAchievementById('view_pin', 'shareme');
   }, [pinId]); // eslint-disable-line react-hooks/exhaustive-deps
 
   //if there is no pinDetail, return a Spinner

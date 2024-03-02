@@ -10,7 +10,7 @@ import { IPin } from '@shareme/utils/interfaces';
 import { MdDownloadForOffline } from 'react-icons/md';
 import { AiTwotoneDelete } from 'react-icons/ai';
 import { BsFillArrowUpRightCircleFill } from 'react-icons/bs';
-import { useAuth, UserAvatar } from 'dread-ui';
+import { useAchievements, useAuth, UserAvatar } from 'dread-ui';
 
 const PinCard = ({ pin }: { pin: IPin }) => {
   const { postedBy, save, _id, image, destination } = pin;
@@ -19,6 +19,7 @@ const PinCard = ({ pin }: { pin: IPin }) => {
 
   const navigate = useNavigate();
   const { signedIn, uid } = useAuth();
+  const { unlockAchievementById } = useAchievements();
   const save_length = save?.length ?? 0;
   const save_index =
     save?.findIndex((item) => item.postedBy?._id === uid) ?? -1;
@@ -32,6 +33,8 @@ const PinCard = ({ pin }: { pin: IPin }) => {
       alreadySaved,
       save_index,
     };
+    const saving = !alreadySaved;
+    if (saving) unlockAchievementById('save_pin', 'shareme');
     setEditing(true);
     toggleSavePin(fields).then(() => {
       setEditing(false);
@@ -72,7 +75,10 @@ const PinCard = ({ pin }: { pin: IPin }) => {
                 <a
                   href={`${image?.asset?.url}?dl=`}
                   download
-                  onClick={(e) => e.stopPropagation()}
+                  onClick={(e) => {
+                    unlockAchievementById('download_pin', 'shareme');
+                    e.stopPropagation();
+                  }}
                   // again no clue why outline-none is here but I don't care enough to question this anymore
                   className='text-dark flex h-9 w-9 items-center justify-center rounded-full bg-white text-xl opacity-75 outline-none hover:opacity-100 hover:shadow-md'
                 >
@@ -118,7 +124,10 @@ const PinCard = ({ pin }: { pin: IPin }) => {
                   target='blank'
                   rel='noreferrer'
                   className='flex items-center gap-2 truncate rounded-full bg-white px-4 py-2 text-right font-bold text-black opacity-70 hover:opacity-100 hover:shadow-md'
-                  onClick={(e) => e.stopPropagation()}
+                  onClick={(e) => {
+                    unlockAchievementById('visit_external_source', 'shareme');
+                    e.stopPropagation();
+                  }}
                 >
                   <BsFillArrowUpRightCircleFill className='flex-shrink-0' />
                   <span className='truncate'>{cleanUrl(destination)}</span>

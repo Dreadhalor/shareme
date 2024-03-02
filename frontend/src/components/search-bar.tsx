@@ -5,12 +5,14 @@ import {
   CardContent,
   DropdownMenuItem,
   UserMenu,
+  useAchievements,
   useAuth,
 } from 'dread-ui';
 
 const SearchBar = ({ searchTerm, setSearchTerm }: any) => {
   const navigate = useNavigate();
   const { uid, signedIn } = useAuth();
+  const { unlockAchievementById, isUnlockable } = useAchievements();
 
   return (
     <div className='mt-5 flex w-full gap-2 pb-5 md:gap-5'>
@@ -18,7 +20,14 @@ const SearchBar = ({ searchTerm, setSearchTerm }: any) => {
         <IoMdSearch fontSize={21} className='ml-1' />
         <input
           type='text'
-          onChange={(e) => setSearchTerm(e.target.value)}
+          onChange={(e) => {
+            if (
+              e.target.value !== '' &&
+              isUnlockable('search_for_gif', 'shareme')
+            )
+              unlockAchievementById('search_for_gif', 'shareme');
+            setSearchTerm(e.target.value);
+          }}
           placeholder='Search'
           value={searchTerm}
           onFocus={() => navigate('/search')}
@@ -34,11 +43,7 @@ const SearchBar = ({ searchTerm, setSearchTerm }: any) => {
         </Link>
         <Card className='m-0 hidden rounded-full md:flex'>
           <CardContent noHeader className='p-0'>
-            <UserMenu
-              className='h-12 w-12'
-              onLogout={() => navigate('/login')}
-              skipAchievements
-            >
+            <UserMenu className='h-12 w-12' onLogout={() => navigate('/login')}>
               {signedIn && (
                 <DropdownMenuItem
                   onSelect={() => navigate(`/user-profile/${uid}`)}

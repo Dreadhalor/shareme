@@ -5,7 +5,7 @@ import { client } from '@shareme/utils/client';
 import { Spinner } from '@shareme/components';
 import { ImageUploadArea } from './image-upload-area';
 import { TextfieldArea } from './textfield-area';
-import { useAuth } from 'dread-ui';
+import { useAchievements, useAuth } from 'dread-ui';
 
 type CreatePinContextValue = {
   title: string;
@@ -57,6 +57,7 @@ const CreatePin = () => {
 
   const navigate = useNavigate();
   const { signedIn, uid } = useAuth();
+  const { unlockAchievementById } = useAchievements();
 
   const uploadPin = async () => {
     if (
@@ -94,6 +95,7 @@ const CreatePin = () => {
       category,
     };
     setUploading(true);
+    unlockAchievementById('create_pin', 'shareme');
 
     client.create(doc).then(() => {
       setUploading(false);

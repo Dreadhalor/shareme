@@ -4,7 +4,7 @@ import { Dispatch, SetStateAction } from 'react';
 import { categories } from '@shareme/utils/data';
 import { IoIosArrowForward } from 'react-icons/io';
 import logo from '@shareme/assets/logo.png';
-import { UserAvatar, useAuth } from 'dread-ui';
+import { UserAvatar, useAchievements, useAuth } from 'dread-ui';
 import { cn } from '@repo/utils';
 
 type Props = {
@@ -18,6 +18,7 @@ const isActiveStyle =
 
 const Sidebar = ({ closeToggle }: Props) => {
   const { uid, displayName, signedIn, loading } = useAuth();
+  const { isUnlockable, unlockAchievementById } = useAchievements();
   const handleCloseSidebar = () => {
     if (closeToggle) closeToggle(false);
   };
@@ -52,7 +53,11 @@ const Sidebar = ({ closeToggle }: Props) => {
               className={({ isActive }) =>
                 isActive ? isActiveStyle : isNotActiveStyle
               }
-              onClick={handleCloseSidebar}
+              onClick={() => {
+                if (isUnlockable('filter_category', 'shareme'))
+                  unlockAchievementById('filter_category', 'shareme');
+                handleCloseSidebar();
+              }}
             >
               <img
                 src={category.image}

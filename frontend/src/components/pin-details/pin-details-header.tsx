@@ -1,9 +1,10 @@
-import { UserAvatar } from 'dread-ui';
+import { UserAvatar, useAchievements } from 'dread-ui';
 import { MdDownloadForOffline } from 'react-icons/md';
 import { Link } from 'react-router-dom';
 
 const PinDetailsHeader = (props: any) => {
   const { pinDetail } = props;
+  const { unlockAchievementById } = useAchievements();
 
   return (
     <>
@@ -12,7 +13,10 @@ const PinDetailsHeader = (props: any) => {
           <a
             href={`${pinDetail?.image?.asset?.url}?dl=`}
             download
-            onClick={(e) => e.stopPropagation()}
+            onClick={(e) => {
+              unlockAchievementById('download_pin', 'shareme');
+              e.stopPropagation();
+            }}
             // again no clue why outline-none is here but I don't care enough to question this anymore
             className='text-dark flex h-9 w-9 items-center justify-center rounded-full bg-white text-xl opacity-75 outline-none hover:opacity-100 hover:shadow-md'
           >
@@ -25,7 +29,10 @@ const PinDetailsHeader = (props: any) => {
             target='_blank'
             rel='noreferrer'
             className='flex items-center gap-2 truncate rounded-full bg-white px-4 py-2 text-right font-bold text-black opacity-70 hover:opacity-100 hover:shadow-md'
-            onClick={(e) => e.stopPropagation()}
+            onClick={(e) => {
+              unlockAchievementById('visit_external_source', 'shareme');
+              e.stopPropagation();
+            }}
           >
             {pinDetail.destination}
           </a>

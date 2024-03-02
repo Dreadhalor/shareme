@@ -1,6 +1,5 @@
 import { client } from '@shareme/utils/client';
 import { useEffect, useState } from 'react';
-import { AiOutlineLogout } from 'react-icons/ai';
 import { useNavigate, useParams } from 'react-router-dom';
 import {
   userCreatedPinsQuery,
@@ -8,7 +7,16 @@ import {
   userSavedPinsQuery,
 } from '@shareme/utils/data';
 import { MasonryLayout, Spinner } from '@shareme/components';
-import { Button, UserAvatar, useAuth } from 'dread-ui';
+import {
+  Button,
+  Card,
+  CardContent,
+  DropdownMenuItem,
+  UserAvatar,
+  UserMenu,
+  useAchievements,
+  useAuth,
+} from 'dread-ui';
 import { cn } from '@repo/utils';
 import { IPin, User } from '@shareme/utils/interfaces';
 
@@ -20,7 +28,8 @@ const UserProfile = () => {
 
   const navigate = useNavigate();
   const { userId } = useParams();
-  const { handleLogout } = useAuth();
+  const { handleLogout, uid, signedIn } = useAuth();
+  const { unlockAchievementById, isUnlockable } = useAchievements();
 
   const random_image =
     'https://source.unsplash.com/800x450/?nature,photography';
@@ -31,7 +40,15 @@ const UserProfile = () => {
     client.fetch(query).then((data) => {
       setUser(data[0]);
     });
-  }, [userId]);
+
+    if (uid === userId) {
+      if (isUnlockable('view_your_profile', 'shareme'))
+        unlockAchievementById('view_your_profile', 'shareme');
+    } else {
+      if (isUnlockable('view_other_profile', 'shareme'))
+        unlockAchievementById('view_other_profile', 'shareme');
+    }
+  }, [userId, uid, unlockAchievementById, isUnlockable]);
 
   useEffect(() => {
     if (text === 'Created') {
@@ -40,12 +57,13 @@ const UserProfile = () => {
         setPins(data);
       });
     } else if (text === 'Saved') {
+      unlockAchievementById('view_saved_pins', 'shareme');
       const query = userSavedPinsQuery(userId!);
       client.fetch(query).then((data) => {
         setPins(data);
       });
     }
-  }, [text, userId]);
+  }, [text, userId, unlockAchievementById]);
 
   if (!user) return <Spinner message='Loading user profile...' />;
 
@@ -69,23 +87,26 @@ const UserProfile = () => {
               {user?.userName}
             </h1>
             <div className='z-1 absolute right-0 top-0 hidden p-2 md:flex'>
-              {userId && (
-                <button
-                  type='button'
-                  className='cursor-pointer rounded-full bg-white p-2 shadow-md outline-none'
-                  onClick={() => {
-                    handleLogout().then((loggedOut) => {
-                      if (loggedOut) navigate('/login');
-                    });
-                  }}
-                >
-                  <AiOutlineLogout
-                    color='red'
-                    fontSize={21}
-                    className='my-auto'
-                  />
-                </button>
-              )}
+              <Card className='m-0 hidden rounded-full md:flex'>
+                <CardContent noHeader className='p-0'>
+                  <UserMenu
+                    className='h-9 w-9'
+                    onLogout={() => {
+                      handleLogout().then((loggedOut) => {
+                        if (loggedOut) navigate('/login');
+                      });
+                    }}
+                  >
+                    {signedIn && (
+                      <DropdownMenuItem
+                        onSelect={() => navigate(`/user-profile/${uid}`)}
+                      >
+                        View profile
+                      </DropdownMenuItem>
+                    )}
+                  </UserMenu>
+                </CardContent>
+              </Card>
             </div>
           </div>
           <div className='mb-4 mt-2 flex flex-row justify-center gap-2 text-center'>

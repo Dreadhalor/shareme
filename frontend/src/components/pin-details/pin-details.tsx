@@ -5,7 +5,7 @@ import { pinDetailMorePinQuery, pinDetailQuery } from '@shareme/utils/data';
 import { Spinner, MasonryLayout } from '@shareme/components';
 import { PinComments } from './pin-comments';
 import { PinDetailsHeader } from './pin-details-header';
-import { useAchievements } from '@dread-ui/index';
+import { useAchievements } from 'dread-ui';
 
 const PinDetails = () => {
   const [pins, setPins] = useState<any>(null);

@@ -23,9 +23,9 @@ const SearchBar = ({ searchTerm, setSearchTerm }: any) => {
           onChange={(e) => {
             if (
               e.target.value !== '' &&
-              isUnlockable('search_for_gif', 'shareme')
+              isUnlockable('search_for_pin', 'shareme')
             )
-              unlockAchievementById('search_for_gif', 'shareme');
+              unlockAchievementById('search_for_pin', 'shareme');
             setSearchTerm(e.target.value);
           }}
           placeholder='Search'

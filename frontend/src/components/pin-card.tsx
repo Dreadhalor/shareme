@@ -139,6 +139,7 @@ const PinCard = ({ pin }: { pin: IPin }) => {
                   className='text-dark rounded-3xl bg-white p-2 text-base font-bold opacity-70 outline-none hover:opacity-100 hover:shadow-md'
                   onClick={(e) => {
                     e.stopPropagation();
+                    unlockAchievementById('delete_pin', 'shareme');
                     deletePin(_id);
                   }}
                 >

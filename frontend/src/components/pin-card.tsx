@@ -125,7 +125,6 @@ const PinCard = ({ pin }: { pin: IPin }) => {
                   rel='noreferrer'
                   className='flex items-center gap-2 truncate rounded-full bg-white px-4 py-2 text-right font-bold text-black opacity-70 hover:opacity-100 hover:shadow-md'
                   onClick={(e) => {
-                    unlockAchievementById('visit_external_source', 'shareme');
                     e.stopPropagation();
                   }}
                 >

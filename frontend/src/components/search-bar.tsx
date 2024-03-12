@@ -1,10 +1,11 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { IoMdAdd, IoMdSearch } from 'react-icons/io';
+import { PiUserCircle } from 'react-icons/pi';
 import {
   Card,
   CardContent,
-  DropdownMenuItem,
   UserMenu,
+  UserMenuOption,
   useAchievements,
   useAuth,
 } from 'dread-ui';
@@ -45,11 +46,12 @@ const SearchBar = ({ searchTerm, setSearchTerm }: any) => {
           <CardContent noHeader className='p-0'>
             <UserMenu className='h-12 w-12' onLogout={() => navigate('/login')}>
               {signedIn && (
-                <DropdownMenuItem
+                <UserMenuOption
                   onSelect={() => navigate(`/user-profile/${uid}`)}
                 >
+                  <PiUserCircle className='-mr-[2px] h-[20px] w-[20px]' />
                   View profile
-                </DropdownMenuItem>
+                </UserMenuOption>
               )}
             </UserMenu>
           </CardContent>

@@ -5,7 +5,8 @@ import { useRef, useState } from 'react';
 import { Link, Route, Routes, useNavigate } from 'react-router-dom';
 import { AiFillCloseCircle } from 'react-icons/ai';
 import logo from '@shareme/assets/logo.png';
-import { DropdownMenuItem, UserMenu, useAuth } from 'dread-ui';
+import { DropdownMenuItem, UserMenu, UserMenuOption, useAuth } from 'dread-ui';
+import { PiUserCircle } from 'react-icons/pi';
 
 const Home = () => {
   const [toggleSidebar, setToggleSidebar] = useState(false);
@@ -34,11 +35,10 @@ const Home = () => {
           </Link>
           <UserMenu className='h-9 w-9' onLogout={() => navigate('/login')}>
             {signedIn && (
-              <DropdownMenuItem
-                onSelect={() => navigate(`/user-profile/${uid}`)}
-              >
+              <UserMenuOption onSelect={() => navigate(`/user-profile/${uid}`)}>
+                <PiUserCircle className='-mr-[2px] h-[20px] w-[20px]' />
                 View profile
-              </DropdownMenuItem>
+              </UserMenuOption>
             )}
           </UserMenu>
         </div>

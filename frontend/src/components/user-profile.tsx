@@ -11,14 +11,15 @@ import {
   Button,
   Card,
   CardContent,
-  DropdownMenuItem,
   UserAvatar,
   UserMenu,
+  UserMenuOption,
   useAchievements,
   useAuth,
 } from 'dread-ui';
 import { cn } from '@repo/utils';
 import { IPin, User } from '@shareme/utils/interfaces';
+import { PiUserCircle } from 'react-icons/pi';
 
 const UserProfile = () => {
   const [user, setUser] = useState<User | null>(null);
@@ -98,11 +99,12 @@ const UserProfile = () => {
                     }}
                   >
                     {signedIn && (
-                      <DropdownMenuItem
+                      <UserMenuOption
                         onSelect={() => navigate(`/user-profile/${uid}`)}
                       >
+                        <PiUserCircle className='-mr-[2px] h-[20px] w-[20px]' />
                         View profile
-                      </DropdownMenuItem>
+                      </UserMenuOption>
                     )}
                   </UserMenu>
                 </CardContent>

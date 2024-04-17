@@ -1,12 +1,14 @@
 import { UserAvatar } from 'dread-ui';
 import { Link } from 'react-router-dom';
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const PinCommentsList = (props: any) => {
   const { pinDetail } = props;
 
   return (
     <div className='flex max-h-[370px] flex-col gap-5 overflow-y-auto rounded-md border-4 border-gray-100 p-2'>
       {pinDetail?.comments?.length ? (
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         pinDetail?.comments?.map((comment: any, index: number) => (
           <div
             key={index}

@@ -33,6 +33,7 @@ const CreatePinContext = createContext<CreatePinContextValue>(
   {} as CreatePinContextValue,
 );
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const useCreatePin = () => {
   const context = useContext(CreatePinContext);
   if (!context) {

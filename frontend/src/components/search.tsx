@@ -3,7 +3,9 @@ import { MasonryLayout, Spinner } from '@shareme/components';
 import { client } from '@shareme/utils/client';
 import { feedQuery, searchQuery } from '@shareme/utils/data';
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const Search = ({ searchTerm }: any) => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [pins, setPins] = useState<any>(null);
   const [loading, setLoading] = useState(true);
 

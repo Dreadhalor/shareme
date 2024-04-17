@@ -1,5 +1,6 @@
 import { Circles } from 'react-loader-spinner';
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const Spinner = (props: any) => {
   return (
     <div className='flex h-full w-full flex-col items-center justify-center'>

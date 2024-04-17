@@ -10,6 +10,7 @@ import {
   useAuth,
 } from 'dread-ui';
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const SearchBar = ({ searchTerm, setSearchTerm }: any) => {
   const navigate = useNavigate();
   const { uid, signedIn } = useAuth();

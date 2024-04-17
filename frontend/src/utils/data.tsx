@@ -163,10 +163,7 @@ export function getUserFromLocalStorage() {
 export function fetchUser() {
   const googleId = getUserFromLocalStorage()?.googleId;
   const query = userQuery(googleId);
-  return client.fetch(query).then((data: User[]) => {
-    let result = data[0] ?? null;
-    return result;
-  });
+  return client.fetch(query).then((data: User[]) => data[0] ?? null);
 }
 
 export const categories = [

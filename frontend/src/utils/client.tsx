@@ -3,6 +3,7 @@ import { SanityImageSource } from '@sanity/image-url/lib/types/types';
 import { v4 as uuidv4 } from 'uuid';
 import { createClient } from '@sanity/client';
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const client = createClient({
   projectId: import.meta.env.VITE_REACT_APP_SANITY_PROJECT_ID,
   dataset: 'production',
@@ -17,6 +18,7 @@ export const client = createClient({
 
 const builder = imageUrlBuilder(client);
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const urlFor = (source: SanityImageSource) => builder.image(source);
 
 export const SanityWrapper = () => {};
@@ -29,6 +31,7 @@ export interface SavePinFields {
   save_index: number;
 }
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const toggleSavePin = ({
   id,
   uid,
@@ -47,6 +50,7 @@ export const toggleSavePin = ({
   }
 };
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const deleteSave = async ({ id, save_index }: any) => {
   return client
     .patch(id)
@@ -57,6 +61,7 @@ const deleteSave = async ({ id, save_index }: any) => {
       window.location.reload();
     });
 };
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const addSave = async ({ id, user_id }: any) => {
   return client
     .patch(id)
@@ -77,6 +82,7 @@ const addSave = async ({ id, user_id }: any) => {
     });
 };
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const deletePin = async (id: string) => {
   return client.delete(id).then(() => {
     window.location.reload();

@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
 import { UserAvatar, useAchievements, useAuth } from 'dread-ui';
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const PinAddComment = (props: any) => {
   const { pinId, fetchPinDetails } = props;
   const { signedIn, uid, loading } = useAuth();

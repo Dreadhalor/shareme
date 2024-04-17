@@ -8,7 +8,9 @@ import { PinDetailsHeader } from './pin-details-header';
 import { useAchievements } from 'dread-ui';
 
 const PinDetails = () => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [pins, setPins] = useState<any>(null);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [pinDetail, setPinDetail] = useState<any>(null);
 
   //useParams allows me to get the pinId from the url

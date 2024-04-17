@@ -5,7 +5,7 @@ import { useRef, useState } from 'react';
 import { Link, Route, Routes, useNavigate } from 'react-router-dom';
 import { AiFillCloseCircle } from 'react-icons/ai';
 import logo from '@shareme/assets/logo.png';
-import { DropdownMenuItem, UserMenu, UserMenuOption, useAuth } from 'dread-ui';
+import { UserMenu, UserMenuOption, useAuth } from 'dread-ui';
 import { PiUserCircle } from 'react-icons/pi';
 
 const Home = () => {

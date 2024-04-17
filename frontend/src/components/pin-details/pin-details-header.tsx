@@ -2,6 +2,7 @@ import { UserAvatar, useAchievements } from 'dread-ui';
 import { MdDownloadForOffline } from 'react-icons/md';
 import { Link } from 'react-router-dom';
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const PinDetailsHeader = (props: any) => {
   const { pinDetail } = props;
   const { unlockAchievementById } = useAchievements();
